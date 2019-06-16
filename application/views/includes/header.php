@@ -77,6 +77,16 @@
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="<?php echo base_url('customersanticipate'); ?>">
+                        <i class="fa fa-circle-o"></i> <span>Danh sách khách chơi</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="<?php echo base_url(''); ?>">
+                        <i class="fa fa-circle-o"></i> <span>Danh sách trúng thưởng</span>
+                    </a>
+                </li>
+                <li class="treeview">
                     <a href="javascript:void(0)">
                         <i class="fa fa-circle-o"></i> <span>Cài đặt</span>
                         <span class="pull-right-container">

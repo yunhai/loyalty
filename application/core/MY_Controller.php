@@ -37,6 +37,26 @@ abstract class MY_Controller extends CI_Controller {
         }
     }
 
+    protected function checkUserLoginHome($isApi = false){
+        $user = $this->session->userdata('user');
+        if($user){
+            $statusId = $this->Musers->getFieldValue(array('UserId' => $user['UserId']), 'StatusId', 0);
+            if($statusId == STATUS_ACTIVED) return $user;
+            else{
+                $fields = array('user', 'configs');
+                foreach($fields as $field) $this->session->unset_userdata($field);
+                if($isApi) echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+                else echo json_encode(array('code' => 0, 'message' => "Vui lòng đăng nhập"));
+                die();
+            }
+        }
+        else{
+            if($isApi) echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+            else echo json_encode(array('code' => 0, 'message' => "Vui lòng đăng nhập"));
+            die();
+        }
+    }
+
     protected function loadModel($models = array()){
         foreach($models as $model) $this->load->model($model);
     }

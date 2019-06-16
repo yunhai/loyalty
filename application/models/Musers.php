@@ -41,6 +41,8 @@ class Musers extends MY_Model {
         return false;
     }
 
+
+
     public function checkStaffExist($staffId, $phoneNumber, $ceoId){ // roleId = 3
         $users = $this->getByQuery("SELECT UserId FROM users WHERE UserId != ? AND StatusId = ? AND RoleId = ? AND PhoneNumber = ? AND CrUserId = ?", array($staffId, STATUS_ACTIVED, 3, $phoneNumber, $ceoId));
         if (!empty($users)) return true;
