@@ -16,6 +16,10 @@
                         			<label class="control-label">Tên nhà mạng (*)</label>
                         			<?php $this->Mconstants->selectConstants('homeNetwork', 'CardNameId', 0, true, '-- Chọn nhà mạng --'); ?>
                         		</div>
+                                <div class="col-sm-12 form-group">
+                                    <label class="control-label">Mệnh giá (*)</label>
+                                    <?php $this->Mconstants->selectConstants('typeCard', 'CardTypeId', 0, true, '-- Chọn mệnh giá --'); ?>
+                                </div>
                         		<div class="col-sm-12 form-group">
                         			<label class="control-label">Số seri (*)</label>
                         			<input type="text" class="form-control cost hmdrequired" name="CardSeri" id="cardSeri" placeholder="Số seri" data-field="Số seri">

@@ -86,9 +86,9 @@ function getLotteryResultDetails(){
     var raffle = 0;
     var flag = false;
     $('#tbodyDetails tr').each(function(){
-        raffle = replaceCost($(this).find('input.raffle').val().trim(), true);
+        raffle = $(this).find('input.raffle').val().trim();
 
-        if(raffle == '' || parseInt(raffle) == 0){
+        if(raffle == ''){
             flag = true;
             showNotification('Vui lòng nhập số xổ', 0);
             $(this).find('input.raffle').focus();

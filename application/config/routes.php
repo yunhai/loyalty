@@ -53,4 +53,4 @@ $route['default_controller'] = 'site';
 $route['404_override'] = '';//'user/permission';
 $route['translate_uri_dashes'] = FALSE;
 //===============================================================
-$route['admin'] = 'user';
+$route['admin'] = 'user/staff';

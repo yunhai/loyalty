@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="<?php echo base_url(''); ?>">
+                    <a href="<?php echo base_url('playerwin'); ?>">
                         <i class="fa fa-circle-o"></i> <span>Danh sách trúng thưởng</span>
                     </a>
                 </li>

@@ -9,25 +9,26 @@ class Site extends MY_Controller {
 	}
 
     public function index(){
-        $this->load->view('site/home');
+    	$user = $this->session->userdata('user');
+        $this->load->view('site/home', $user);
 	}
 
 	public function update(){
 		$user = $this->checkUserLoginHome();
 		if($user){
 			$data = $this->arrayFromPost(array('NumberOne', 'NumberTwo'));
-			if(intval($data['NumberOne']) >= 0 || intval($data['NumberTwo']) >= 0){
+			if(!empty($data['NumberOne']) && !empty($data['NumberTwo']) || (intval($data['NumberOne']) >= 0 || intval($data['NumberTwo']) >= 0)){
 				$this->load->model('Mcustomersanticipates');
 				$dateNow = getCurentDateTime();
 				$date1 = str_replace('-', '/', $dateNow);
-				$tomorrow = date('Y-m-d H:i:s',strtotime($date1 . "+1 days"));
+				$tomorrow = date('Y-m-d 00:00:00',strtotime($date1 . "+1 days"));
 				$userId = $user['UserId'];
 				$flag = false;
 				if($dateNow <= date('Y-m-d 16:00:00')){
-					$flag = $this->Mcustomersanticipates->checkExist_1($userId);
+					$flag = $this->Mcustomersanticipates->checkExist_1($userId, $dateNow);
 				}
 				if($dateNow > date('Y-m-d 16:00:00')){
-					$flag = $this->Mcustomersanticipates->checkExist_2($userId);
+					$flag = $this->Mcustomersanticipates->checkExist_2($userId, $tomorrow);
 				}
 
 				if($flag){
@@ -35,11 +36,13 @@ class Site extends MY_Controller {
 					die;
 				}
 				else{
+					$dateTime = date('Y-m-d 00:00:00');
+					if($dateNow > date('Y-m-d 16:00:00')) $dateTime = $tomorrow;
 					$postData = array(
 						'LotteryStationId' => 17,
 						'Number' => $data['NumberOne'].$data['NumberTwo'],
 						'UserId' => $userId,
-						'CrDateTime' => getCurentDateTime(),
+						'CrDateTime' => $dateTime,
 						'StatusId' => STATUS_ACTIVED,
 					);
 					$flag = $this->Mcustomersanticipates->save($postData);
@@ -50,6 +53,13 @@ class Site extends MY_Controller {
 				
 			}else echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra, vui lòng thử lại."));
 		} else echo json_encode(array('code' => -2, 'message' => "Vui lòng đăng nhập"));
+	}
+
+	public function ajaxUserWin(){
+		$user = $this->session->userdata('user');
+		$this->load->model('Mcustomersanticipates');
+		$listDatas = $this->Mcustomersanticipates->getListHomeWin($user);
+		echo json_encode(array('code' => 1, 'message' => "data trả về", "data" => $listDatas));
 	}
 
 }

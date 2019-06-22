@@ -16,9 +16,13 @@ app.initLibrary = function(){
 
 app.submit = function(){
 	$("body").on('click', '.submit', function(){
-        if (validateEmpty('#cardForm')) {
+        if (validateEmpty('#cardForm')) { 
             if($("select#cardNameId").val() == 0){
                 showNotification("Vui lòng chọn nhà mạng.", 0);
+                return false;
+            }
+            if($("select#cardTypeId").val() == 0){
+                showNotification("Vui lòng chọn mệnh giá.", 0);
                 return false;
             }
     		var form = $('#cardForm');

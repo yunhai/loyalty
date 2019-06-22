@@ -73,6 +73,12 @@ if (!function_exists('getCurentDateTime')){
     }
 }
 
+if (!function_exists('getDateNow')){
+    function getDateNow(){
+        return date('Y-m-d');
+    }
+}
+
 if (!function_exists('priceFormat')){
     function priceFormat($price, $formatDecimal = false){
         if($formatDecimal) $decimals = 2;

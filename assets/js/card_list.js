@@ -48,10 +48,10 @@ function renderContentCards(data){
             html += '<td>'+data[item].CardNumber+'</td>';
             html += '<td class="text-center"><span class="' + labelCss[data[item].CardActiveId] + '">' + data[item].CardActive + '</span></td>';
             html += '<td class="text-center">';
-            if(data[item].CardActiveId == 2){
+            if(parseInt(data[item].CardActiveId) == 2){
             html += '<a href="'+urlEdit+data[item].CardId+'"  class="font-fix-1 text-primary"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;';
             }
-            html += '<a href="javascript:void(0)"  class="font-fix-1 text-danger link_delete" data-id="'+data[item].CardId+'"><i class="fa fa-trash"></i></a>';
+            if(parseInt(data[item].CardActiveId) != 3 && parseInt(data[item].CardActiveId) != 4) html += '<a href="javascript:void(0)"  class="font-fix-1 text-danger link_delete" data-id="'+data[item].CardId+'"><i class="fa fa-trash"></i></a>';
             html +='</td>';
             html += '</tr>';
         }

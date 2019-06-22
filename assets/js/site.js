@@ -4,6 +4,9 @@ var app = app || {};
 app.init = function () {
     app.initLibrary();
     app.submit();
+    app.login();
+    app.register();
+    app.userWin();
 };
 
 
@@ -37,7 +40,7 @@ app.submit = function(){
                 success: function (response) {
                     var json = $.parseJSON(response);
                     showNotification(json.message, json.code);
-                    $("input").val('');
+                    $("#inputNumberForm input").val('');
                 },
                 error: function (response) {
                     showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
@@ -47,6 +50,99 @@ app.submit = function(){
         }
         return false;
 	});
+}
+
+app.login = function(){
+    $(document).on('submit','#userForm',function (){
+        if(validateEmpty('#userForm')) {
+            var form = $('#userForm');
+            var data = form.serialize();
+            form.find('input, button').prop("disabled", true);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: form.attr('action'),
+                data: data,
+                success: function (response) {
+                    var json = response;// $.parseJSON(response);
+                    showNotification(json.message, json.code);
+                },
+                error: function (response) {
+                    showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
+                    form.find('input, button').prop("disabled", false);
+                }
+            });
+        }
+        return false;
+    });
+}
+
+app.register = function(){
+    $(document).on('click','#btnRegister',function (){
+        if(validateEmpty('#userRegisterForm')){
+            if ($('input#userPass').val() != $('input#rePass').val()) {
+                showNotification('Mật khẩu không trùng', 0);
+                return false;
+            }
+            var form = $('#userRegisterForm');
+            var btn = $(this);
+            btn.prop('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: {
+                    UserId:     0,
+                    UserName: $('input#fullName').val().trim(),
+                    UserPass:   $('input#userPass').val(),
+                    FullName:   $('input#fullName').val().trim(),
+                    Email:      $('input#email').val(),
+                    GenderId:   1,
+                    StatusId:   2,
+                    PhoneNumber: $('input#phoneNumber').val(),
+                },
+                success: function (response) {
+                    var json = $.parseJSON(response);
+                    if(json.code == 1){
+                        form.trigger('reset');
+                        showNotification('Chúc mừng bạn đăng ký thành công', 1);
+                    }
+                    else showNotification(json.message, json.code);
+                    btn.prop('disabled', false);
+                },
+                error: function (response) {
+                    showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
+                    btn.prop('disabled', false);
+                }
+            });
+        }
+        return false;
+    });
+}
+
+app.userWin = function(){
+    $.ajax({
+        type: "POST",
+        url: $("input#urlGetWin").val().trim(),
+        success: function (response) {
+            console.log(response)
+            var json = $.parseJSON(response);
+            if(json.code == 1){
+                var data = json.data;
+                var html = '';
+                for (var item = 0; item < data.length; item++) {
+                    html += '<tr>';
+                    html += '<td class="text-indent">'+data[item].FullName+'</td>';
+                    html += '<td class="text-center">'+data[item].CardType+'</td>'
+                    html += '</tr>';
+                }
+                console.log(html)
+                $("#tbody-bac").html(html);
+            }
+        },
+        error: function (response) {
+            showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
+        }
+    });
 }
 
 $(document).ready(function(){

@@ -21,9 +21,19 @@ class Mconstants extends CI_Model {
         5 => 'Gmobile',
     );
 
+    public $typeCard = array(
+        1 => '20,000',
+        2 => '50,000',
+        3 => '100,000',
+        4 => '200,000',
+        5 => '500,000'
+    );
+
     public $cardActive = array(
         1 => 'Đã dùng',
         2 => 'Chưa dùng',
+        3 => 'Card đã add cho khách',
+        4 => 'Khách đã nhận card',
     );
 
     /*

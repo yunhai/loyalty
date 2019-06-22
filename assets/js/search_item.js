@@ -739,6 +739,9 @@ function actionItemAndSearch(config) {
             }, 500);
         }
     });
+    
+ ;
+   
 
 
 //vì mỗi table lại có kiểu gen html khác nhau nên không thể gôp chung lại được

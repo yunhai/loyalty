@@ -61,9 +61,9 @@ class Card extends MY_Controller {
 
 	public function update(){
 		$user = $this->checkUserLogin();
-		$postData = $this->arrayFromPost(array('CardNameId', 'CardSeri', 'CardNumber'));
+		$postData = $this->arrayFromPost(array('CardNameId', 'CardSeri', 'CardNumber', 'CardTypeId'));
         $cardId = $this->input->post('CardId');
-        if($postData['CardNameId'] > 0  && $postData['CardSeri'] > 0 && $postData['CardNumber'] > 0){
+        if($postData['CardNameId'] > 0  && $postData['CardSeri'] > 0 && $postData['CardNumber'] > 0 && $postData['CardTypeId'] > 0){
         	$this->load->model('Mcards');
             $flag = $this->Mcards->checkExist($postData, $cardId);
             if($flag){
@@ -114,5 +114,16 @@ class Card extends MY_Controller {
         $data1 = $this->Mcards->searchByFilter($searchText, $itemFilters, $limit, $page);
         $data = array_merge($data, $data1);
         echo json_encode($data);
+    }
+
+    public function loadListTable(){
+        $user = $this->checkUserLogin();
+        if($user){
+            $cardNameId = $this->input->post('CardNameId');
+            $cardTypeId = $this->input->post('CardTypeId');
+            $this->loadModel(array('Mcards'));
+            $listDatas = $this->Mcards->getBy(array('CardNameId' => $cardNameId, 'CardTypeId' => $cardTypeId , 'StatusId' => STATUS_ACTIVED, 'CardActiveId' => STATUS_ACTIVED));
+            echo json_encode(array('code' => 1, 'data' => $listDatas));
+        }else echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
     }
 }

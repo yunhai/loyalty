@@ -65,7 +65,7 @@ class Lotteryresult extends MY_Controller {
     }
 
     public function update(){
-        $user = $this->checkUserLogin(true);
+        $user = $this->checkUserLogin();
         $postData = $this->arrayFromPost(array('LotteryStationId', 'CrDateTime'));
         $lotteryResultDetails = json_decode(trim($this->input->post('LotteryResultDetails')), true);
         if(!empty($postData['CrDateTime']) && $postData['LotteryStationId'] > 0 && !empty($lotteryResultDetails)){
@@ -80,7 +80,7 @@ class Lotteryresult extends MY_Controller {
     }
 
     public function delete(){
-        $this->checkUserLogin(true);
+        $user = $this->checkUserLogin();
         $lotteryResultId = $this->input->post('LotteryResultId');
         if($lotteryResultId > 0){
             $this->load->model('Mlotteryresults');

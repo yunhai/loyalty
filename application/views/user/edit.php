@@ -73,7 +73,7 @@
                             <div class="box-body">
                                 <div class="text-center">
                                     <h4 class="mgbt-20 light-blue">Câu hỏi: <?php echo $question ?></h4>
-                                    <h4 class="mgbt-20 light-blue">Trả lời: <?php echo $this->Mconstants->answer[$userEdit['AnswerId']] ?></h4>
+                                    <h4 class="mgbt-20 light-blue">Trả lời: <?php echo $userEdit['AnswerId'] > 0 ? $this->Mconstants->answer[$userEdit['AnswerId']]:''; ?></h4>
                                 </div>
                             </div>
                         </div>
