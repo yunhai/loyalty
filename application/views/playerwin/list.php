@@ -11,7 +11,7 @@
                     </ul>
                 </div>
                 <div class="input-group margin col-sm-3">
-                    <input type="text" class="form-control datepicker" id="itemSearchName" value="19/06/2019">
+                    <input type="text" class="form-control datepicker" id="itemSearchName" value="<?php echo date('d/m/Y') ?>">
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-info btn-flat btn-search ">Tìm kiếm</button>
                         </span>

@@ -7,6 +7,7 @@ app.init = function () {
     app.login();
     app.register();
     app.userWin();
+    app.receiveCard();
 };
 
 
@@ -39,6 +40,10 @@ app.submit = function(){
                 data: form.serialize(),
                 success: function (response) {
                     var json = $.parseJSON(response);
+                    if(json.code == 1){
+                        var urlShare = $("input#urlShare").val()+'/'+json.number;
+                        $(".fb-share-button").attr("data-href", urlShare);
+                    }
                     showNotification(json.message, json.code);
                     $("#inputNumberForm input").val('');
                 },
@@ -73,6 +78,41 @@ app.login = function(){
                 }
             });
         }
+        return false;
+    });
+}
+
+app.receiveCard = function(){
+    $("body").on("click", 'a.receive-card', function(){
+        var customersAnticipateId = parseInt($(this).attr("data-id"));
+        if(customersAnticipateId >= 0){
+            $.ajax({
+                type: "POST",
+                url: $("input#urlReceiveCard").val().trim(),
+                data: {
+                    CustomersAnticipateId:  customersAnticipateId,
+                },
+                success: function (response) {
+                    console.log(response)
+                    var json = $.parseJSON(response);
+                    showNotification(json.message, json.code);
+                    if(json.code == 1){
+                        // $(".fb-share-button").attr("data-value", "Haminh man");
+                        var data = json.data;
+
+                        $(".fb-share-button").trigger('click');
+                        if(confirm('Vui lòng nhận card: mã:'+data.CardNumber)){
+
+                        }
+
+
+                    }
+                },
+                error: function (response) {
+                    showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
+                }
+            });
+        }else showNotification("Có lổi xảy ra, vui lòng thử lại sau.", 0);
         return false;
     });
 }

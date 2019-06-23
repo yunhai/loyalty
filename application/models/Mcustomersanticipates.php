@@ -176,7 +176,13 @@ class Mcustomersanticipates extends MY_Model {
         return $data;
     }
 
-    public function getListHomeWin(){
+    public function getListHomeWin($user){
+        $where = '';
+        $flag = false;
+        if($user){
+            $where = ' customersanticipates.UserId = '.$user['UserId'];
+            $flag = true;
+        }
         $query = "select users.FullName, cards.CardTypeId, customersanticipates.CustomersAnticipateId 
                 from customersanticipates 
                 LEFT JOIN playerwins ON playerwins.CustomersAnticipateId = customersanticipates.CustomersAnticipateId 
@@ -186,12 +192,28 @@ class Mcustomersanticipates extends MY_Model {
                 LEFT JOIN lotteryresults ON lotteryresults.LotteryStationId = lotterystations.LotteryStationId 
                 LEFT JOIN lotteryresultdetails ON lotteryresultdetails.LotteryResultId = lotteryresults.LotteryResultId 
                 where  lotteryresultdetails.Raffle = customersanticipates.Number 
-                AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2 ORDER BY customersanticipates.CustomersAnticipateId";
+                AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2 AND ".$where." ORDER BY customersanticipates.CustomersAnticipateId";
         $datas = $this->getByQuery($query);
-        for ($i = 0; $i < count($datas); $i++) {
-            $datas[$i]['CardType'] = 'Thẻ Cào Điện Thoại '.$this->Mconstants->typeCard[$datas[$i]['CardTypeId']].' VNĐ';
+        if($flag){
+            for ($i = 0; $i < count($datas); $i++) {
+                $datas[$i]['CardType'] = '<a class="receive-card" href="javascript:void(0)" data-id="'.$datas[$i]['CustomersAnticipateId'].'">Thẻ Cào Điện Thoại '.$this->Mconstants->typeCard[$datas[$i]['CardTypeId']].' VNĐ </a>';
+            }
+        }else{
+            for ($i = 0; $i < count($datas); $i++) {
+                $datas[$i]['CardType'] = 'Thẻ Cào Điện Thoại '.$this->Mconstants->typeCard[$datas[$i]['CardTypeId']].' VNĐ';
+            }
         }
+        
         return $datas;
+    }
+
+    public function getCardId($userId, $customersAnticipateId){
+        $query = "SELECT playerwins.CardId from customersanticipates
+                INNER JOIN playerwins ON playerwins.CustomersAnticipateId = customersanticipates.CustomersAnticipateId
+                WHERE customersanticipates.CustomersAnticipateId = ? AND customersanticipates.UserId = ? AND customersanticipates.StatusId = ?";
+        $datas = $this->getByQuery($query, array($customersAnticipateId, $userId, STATUS_ACTIVED));
+        if($datas) return $datas[0]['CardId'];
+        else return 0;
     }
 
 }

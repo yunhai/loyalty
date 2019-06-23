@@ -17,5 +17,19 @@
     </div>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e3ba7c637c424ce"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <button type="button" id="abcdnj">click auto</button>
   </body>
 </html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#abcdnj").click(function(){
+      $(".addthis_inline_share_toolbox_b0bq").click()
+    });
+    $("body").on("click","#u_0_2", function(){
+      console.log("ádfasdfads")
+    })
+     // $("#u_0_2").click(function(){console.log("ádfasdfads")});
+  });
+</script>

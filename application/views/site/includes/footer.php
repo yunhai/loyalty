@@ -20,6 +20,7 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="assets/web/js/bootstrap.js"></script>
         <script src="assets/vendor/plugins/pnotify/pnotify.custom.min.js"></script>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e3ba7c637c424ce"></script>
         <script src="assets/js/site.js"></script>
     </body>
 </html>

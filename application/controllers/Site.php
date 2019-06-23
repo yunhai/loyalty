@@ -10,7 +10,7 @@ class Site extends MY_Controller {
 
     public function index(){
     	$user = $this->session->userdata('user');
-        $this->load->view('site/home', $user);
+        $this->load->view('site/home', array('user' =>$user));
 	}
 
 	public function update(){
@@ -46,7 +46,7 @@ class Site extends MY_Controller {
 						'StatusId' => STATUS_ACTIVED,
 					);
 					$flag = $this->Mcustomersanticipates->save($postData);
-					if($flag) echo json_encode(array('code' => 1, 'message' => "Thêm số dự đoán thành công."));
+					if($flag) echo json_encode(array('code' => 1, 'message' => "Thêm số dự đoán thành công.", 'number' => $postData['Number']));
 					else echo json_encode(array('code' => 0, 'message' => "Có lỗi xảy ra, vui lòng thử lại."));
 				}
 				
@@ -60,6 +60,23 @@ class Site extends MY_Controller {
 		$this->load->model('Mcustomersanticipates');
 		$listDatas = $this->Mcustomersanticipates->getListHomeWin($user);
 		echo json_encode(array('code' => 1, 'message' => "data trả về", "data" => $listDatas));
+	}
+
+	public function receiveCard(){
+		$user = $this->session->userdata('user');
+		$customersAnticipateId = $this->input->post('CustomersAnticipateId');
+		if($user && $customersAnticipateId > 0){
+			$this->load->model(array('Mcustomersanticipates', 'Mcards'));
+			$cardId = $this->Mcustomersanticipates->getCardId($user['UserId'], $customersAnticipateId);
+			if($cardId > 0){
+				$flag = $this->Mcards->save(array('CardActiveId' => 4), $cardId);
+				if($flag){
+					$card = $this->Mcards->get($cardId);
+					$card['CardType'] = $this->Mconstants->typeCard[$card['CardTypeId']];
+					echo json_encode(array('code' => 1, 'message' => "Nhận card thành công", 'data' => $card));
+				}else echo json_encode(array('code' => 0, 'message' => 'Có lỗi xảy ra, vui lòng thử lại'));
+			}
+		}else $this->load->view('user/permission');
 	}
 
 }

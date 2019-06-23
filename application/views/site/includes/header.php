@@ -24,6 +24,8 @@
         <div class="side_menu">
             <div class="burger_box visible-xs">
                 <input type="hidden" id="urlGetWin" value="<?php echo base_url('site/ajaxUserWin'); ?>">
+                <input type="hidden" id="urlReceiveCard" value="<?php echo base_url('site/receiveCard') ?>">
+                <input type="hidden" id="urlShare" value="<?php echo base_url('ban-da-chia-se-ket-qua-du-doan-la/') ?>">
                 <div class="menu-icon-container">
                     <a href="<?php echo base_url() ?>" class="menu-icon js-menu_toggle closed">
                     <span class="menu-icon_box">
@@ -47,10 +49,12 @@
         </div>
         <div class="header">
             <div class="container collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                <?php if($user): ?>
                 <div class="header-w3left">
                     <span class="pull-left">Bạn được<br>nhận thưởng</span>
                     <span class="bg-money">0</span>
                 </div>
+                <?php endif; ?>
                 <div class="header-w3right">
                     <ul>
                         <li><a class="scrollTo login" href="#form-guess">ĐĂNG NHẬP</a></li>
@@ -78,5 +82,8 @@
                 </div>
             </div>
         </div>
+      <div id="fb-root" style="display: none"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=1310386095769247&autoLogAppEvents=1"></script>
+      
         <!-- //banner -->
       

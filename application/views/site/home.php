@@ -14,8 +14,13 @@
                     <div class="serw3agile-grid">
                         <span class="hi-icon hi-icon-archive glyphicon"> <input type="text" name="NumberTwo" maxlength="1" placeholder="$" class="cost hmdrequired" data-field="Nhập số"></span>
                     </div>
+                   <?php if($user): ?>
+                        <div class="fb-share-button" data-href="http://loyalty.client.webstarterz.com/hello.jpg" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                <?php endif; ?>
                 </div>
+
                 <button type="submit" class="btn btn-primary submit">NHẬP SỐ</button>
+                 
             <?php echo form_close(); ?>
         </div>
     </div>

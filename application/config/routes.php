@@ -54,3 +54,4 @@ $route['404_override'] = '';//'user/permission';
 $route['translate_uri_dashes'] = FALSE;
 //===============================================================
 $route['admin'] = 'user/staff';
+$route['ban-da-chia-se-ket-qua-du-doan-la/(:num)'] = 'share/index/$1';
