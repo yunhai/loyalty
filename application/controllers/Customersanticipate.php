@@ -5,29 +5,33 @@ class Customersanticipate extends MY_Controller {
 
 	public function index(){
         $user = $this->checkUserLogin();
-        $data = $this->commonData($user,
-            'Danh sách khách chơi',
-            array(
-                'scriptHeader' => array('css' => array('vendor/plugins/tagsinput/jquery.tagsinput.min.css','vendor/plugins/datepicker/datepicker3.css')),
-                'scriptFooter' => array('js' => array('vendor/plugins/sortable/jquery-ui.js', 'vendor/plugins/sortable/Sortable.min.js','vendor/plugins/tagsinput/jquery.tagsinput.min.js','vendor/plugins/datepicker/bootstrap-datepicker.js', 'js/search_item.js', 'js/customersanticipate_list.js'))
-            )
-        );
-        if($this->Mactions->checkAccess($data['listActions'], 'customersanticipate')) {
-            $this->load->view('customersanticipate/list', $data);
-        }
-        else $this->load->view('user/permission', $data);
+        if($user['RoleId'] == 1){
+            $data = $this->commonData($user,
+                'Danh sách khách chơi',
+                array(
+                    'scriptHeader' => array('css' => array('vendor/plugins/tagsinput/jquery.tagsinput.min.css','vendor/plugins/datepicker/datepicker3.css')),
+                    'scriptFooter' => array('js' => array('vendor/plugins/sortable/jquery-ui.js', 'vendor/plugins/sortable/Sortable.min.js','vendor/plugins/tagsinput/jquery.tagsinput.min.js','vendor/plugins/datepicker/bootstrap-datepicker.js', 'js/search_item.js', 'js/customersanticipate_list.js'))
+                )
+            );
+            if($this->Mactions->checkAccess($data['listActions'], 'customersanticipate')) {
+                $this->load->view('customersanticipate/list', $data);
+            }
+            else $this->load->view('user/permission', $data);
+        } else redirect(base_url());
 	}
 
 	public function delete(){
-        $this->checkUserLogin(true);
-        $customersAnticipateId = $this->input->post('CustomersAnticipateId');
-        if($customersAnticipateId > 0){
-            $this->load->model('Mcustomersanticipates');
-            $flag = $this->Mcustomersanticipates->changeStatus(0, $customersAnticipateId);
-            if($flag) echo json_encode(array('code' => 1, 'message' => "Xóa thành công"));
-            else echo json_encode(array('code' => 0, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
-        }
-        else echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+        $user = $this->checkUserLogin();
+        if($user['RoleId'] == 1){
+            $customersAnticipateId = $this->input->post('CustomersAnticipateId');
+            if($customersAnticipateId > 0){
+                $this->load->model('Mcustomersanticipates');
+                $flag = $this->Mcustomersanticipates->changeStatus(0, $customersAnticipateId);
+                if($flag) echo json_encode(array('code' => 1, 'message' => "Xóa thành công"));
+                else echo json_encode(array('code' => 0, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+            }
+            else echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+        } else redirect(base_url());
     }
 
 	public function searchByFilter(){
