@@ -180,7 +180,7 @@ class Mcustomersanticipates extends MY_Model {
         $where = '';
         $flag = false;
         if($user){
-            $where = ' customersanticipates.UserId = '.$user['UserId'];
+            $where =  ' AND customersanticipates.UserId = '.$user['UserId'];
             $flag = true;
         }
         $query = "select users.FullName, cards.CardTypeId, customersanticipates.CustomersAnticipateId 
@@ -192,7 +192,7 @@ class Mcustomersanticipates extends MY_Model {
                 LEFT JOIN lotteryresults ON lotteryresults.LotteryStationId = lotterystations.LotteryStationId 
                 LEFT JOIN lotteryresultdetails ON lotteryresultdetails.LotteryResultId = lotteryresults.LotteryResultId 
                 where  lotteryresultdetails.Raffle = customersanticipates.Number 
-                AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2 AND ".$where." ORDER BY customersanticipates.CustomersAnticipateId";
+                AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2  ".$where." ORDER BY customersanticipates.CustomersAnticipateId";
         $datas = $this->getByQuery($query);
         if($flag){
             for ($i = 0; $i < count($datas); $i++) {
