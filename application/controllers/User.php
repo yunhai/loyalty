@@ -5,14 +5,14 @@ class User extends MY_Controller {
 
 	public function index(){
 		if(!$this->session->userdata('user')){
-			$data = array('title' => 'Đăng nhập');
-			if ($this->session->flashdata('txtSuccess')) $data['txtSuccess'] = $this->session->flashdata('txtSuccess');
+			// $data = array('title' => 'Đăng nhập');
+			// if ($this->session->flashdata('txtSuccess')) $data['txtSuccess'] = $this->session->flashdata('txtSuccess');
 			$this->load->helper('cookie');
 			$data['userName'] = $this->input->cookie('userName', true);
 			$data['userPass'] = $this->input->cookie('userPass', true);
 			$this->load->view('user/login_new', $data);
 		}
-		else redirect('user/dashboard');
+		else redirect('user/staff');
 	}
 
 	public function logout(){
