@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2019 at 04:39 PM
+-- Generation Time: Jun 27, 2019 at 04:26 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -62,10 +62,10 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`CardId`, `CardNameId`, `CardTypeId`, `CardSeri`, `CardNumber`, `CardActiveId`, `StatusId`) VALUES
-(1, 2, 1, '089898898', '089898899', 3, 2),
+(1, 2, 1, '089898898', '089898899', 4, 2),
 (2, 2, 3, '99999999999999', '9999999999', 2, 2),
 (3, 2, 5, '1111111111', '1111111111111', 2, 2),
-(4, 2, 4, '22222222222', '2222222222', 3, 2),
+(4, 2, 4, '22222222222', '2222222222', 4, 2),
 (5, 1, 3, '333333333', '3333333333333', 3, 2);
 
 -- --------------------------------------------------------
@@ -95,7 +95,8 @@ INSERT INTO `customersanticipates` (`CustomersAnticipateId`, `LotteryStationId`,
 (16, 17, '66', '2019-06-19 00:00:00', 5, 2),
 (17, 17, '01', '2019-06-18 00:00:00', 6, 2),
 (18, 17, '02', '2019-06-19 00:00:00', 6, 2),
-(19, 17, '02', '2019-06-21 00:00:00', 3, 2);
+(19, 17, '02', '2019-06-21 00:00:00', 3, 2),
+(22, 17, '56', '2019-06-24 00:00:00', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -405,7 +406,7 @@ ALTER TABLE `cards`
 -- AUTO_INCREMENT for table `customersanticipates`
 --
 ALTER TABLE `customersanticipates`
-  MODIFY `CustomersAnticipateId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `CustomersAnticipateId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `filters`
