@@ -72,17 +72,17 @@
         <section class="sidebar">
             <ul class="sidebar-menu">
                 <li class="treeview">
-                    <a href="<?php echo base_url('user/staff'); ?>">
-                        <i class="fa fa-circle-o"></i> <span>Danh sách khách hàng</span>
+                    <a href="<?php echo base_url('lotteryresult'); ?>" title="Kết quả sổ xố">
+                        <i class="fa fa-circle-o"></i><span>Kết quả sổ xố</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="<?php echo base_url('customersanticipate'); ?>">
-                        <i class="fa fa-circle-o"></i> <span>Danh sách khách chơi</span>
+                    <a href="<?php echo base_url('customersanticipate'); ?>" title="Danh sách lượt chơi">
+                        <i class="fa fa-circle-o"></i> <span>Danh sách lượt chơi</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="<?php echo base_url('playerwin'); ?>">
+                    <a href="<?php echo base_url('playerwin'); ?>" title="Danh sách trúng thưởng">
                         <i class="fa fa-circle-o"></i> <span>Danh sách trúng thưởng</span>
                     </a>
                 </li>
@@ -94,9 +94,13 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url('card'); ?>"><i class="fa fa-circle-o"></i>Card điện thoại</a></li>
-                        <li><a href="<?php echo base_url('lotteryresult'); ?>"><i class="fa fa-circle-o"></i>Kết quả sổ xố</a></li>
+                        <li><a href="<?php echo base_url('card'); ?>"><i class="fa fa-circle-o"></i>Card điện thoại</a></li>                        
                         <li><a href="<?php echo base_url('question'); ?>"><i class="fa fa-circle-o"></i>Câu hỏi đăng ký TK</a></li>
+                        <li>
+                            <a href="<?php echo base_url('user/staff'); ?>">
+                                <i class="fa fa-circle-o"></i> <span>Danh sách người chơi</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
