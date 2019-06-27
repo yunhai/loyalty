@@ -71,6 +71,7 @@ app.login = function(){
                 success: function (response) {
                     var json = response;// $.parseJSON(response);
                     showNotification(json.message, json.code);
+                    location.reload();
                 },
                 error: function (response) {
                     showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
