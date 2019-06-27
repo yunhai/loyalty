@@ -11,8 +11,8 @@ class Musers extends MY_Model {
 
     public function login($userName, $userPass){
         if(!empty($userName) && !empty($userPass)){
-            $query = "SELECT * FROM users WHERE UserPass=? AND StatusId=? AND (UserName=? OR PhoneNumber=?) LIMIT 1";
-            $users = $this->getByQuery($query, array(md5($userPass), STATUS_ACTIVED, $userName, $userName));
+            $query = "SELECT * FROM users WHERE UserPass=? AND StatusId=? AND (UserName=? OR PhoneNumber=? OR Email =?) LIMIT 1";
+            $users = $this->getByQuery($query, array(md5($userPass), STATUS_ACTIVED, $userName, $userName, $userName));
             if(!empty($users)){
                 $user = $users[0];
                 /*$this->load->model('Mlogins');
