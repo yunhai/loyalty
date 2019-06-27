@@ -118,18 +118,14 @@ class Mconstants extends CI_Model {
 
     public function getUrl($itemSlug, $itemId, $itemTypeId, $siteId = 1){
         $retVal = 'javascript:void(0)';
-        if($siteId == 1){ //ricky
+        if($siteId == 1){
             if ($itemTypeId == 1) $retVal = base_url($itemSlug . '-c' . $itemId . '.html');
             elseif ($itemTypeId == 3) $retVal = base_url('products/' . $itemSlug);
             elseif ($itemTypeId == 4) $retVal = base_url('pages/' . $itemSlug);
             elseif ($itemTypeId == 5) $retVal = base_url('article/' . $itemSlug);
 
         }
-        elseif($siteId == 2){ //rulya
-            if ($itemTypeId == 1) $retVal = base_url('danh-muc/'.$itemSlug);
-            elseif ($itemTypeId == 3) $retVal = base_url('san-pham/' . $itemSlug);
-            elseif ($itemTypeId == 4) $retVal = base_url('blog/' . $itemSlug);
-        }
+        
         return $retVal;
     }
 }

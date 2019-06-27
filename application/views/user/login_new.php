@@ -15,7 +15,7 @@
     <input type="text" hidden="hidden" name="IsRemember" value="on">
      <input type="text" hidden="hidden" name="IsGetConfigs" value="1">
     <?php echo form_close(); ?>
-     <input type="hidden" id="dashboardUrl" value="<?php echo base_url('user/staff'); ?>">
+     <input type="hidden" id="dashboardUrl" value="<?php echo base_url('user/dashboard'); ?>">
     <input type="hidden" id="siteName" value="">
 </div>
 </div>

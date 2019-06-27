@@ -5,8 +5,17 @@ class Site extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
+        $this->load->model('Mconfigs');
 	}
 
+	private function commonDataSite($title = ''){
+		$configSites =  $this->Mconfigs->getListMap();
+		return array(
+			'title' => $title . $configSites['COMPANY_NAME'],
+			'totalItemCart' => $this->cart->total_items(),
+			'configSites' => $configSites
+		);
+	}
 
     public function index(){
     	$user = $this->session->userdata('user');

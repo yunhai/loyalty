@@ -53,7 +53,6 @@ class User extends MY_Controller {
 			if ($user) {
 				// if(empty($user['Avatar'])) $user['Avatar'] = NO_IMAGE;
 				$this->session->set_userdata('user', $user);
-                
 				if ($postData['IsRemember'] == 'on') {
 					$this->load->helper('cookie');
 					$this->input->set_cookie(array('name' => 'userName', 'value' => $userName, 'expire' => '86400'));

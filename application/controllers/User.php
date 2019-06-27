@@ -28,7 +28,7 @@ class User extends MY_Controller {
 
 	public function staff(){
 		$user = $this->checkUserLogin();
-		// if($user['RoleId'] == 1){
+		if($user['RoleId'] == 1){
 	        $data = $this->commonData($user,
 	            'Danh sách khách hàng',
 	            array(
@@ -40,7 +40,7 @@ class User extends MY_Controller {
 	            $this->load->view('user/list', $data);
 	        }
 	        else $this->load->view('user/permission', $data);
-	    // } else redirect(base_url());
+	    } else redirect(base_url());
 	}
 
 	public function add(){
