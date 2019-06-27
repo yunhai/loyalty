@@ -42,31 +42,25 @@ class User extends MY_Controller {
 	}
 
 	public function checkLogin(){
-        header('Access-Control-Allow-Origin: *');
+        // header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
-		//log_message('error', json_encode($_POST));
-		//log_message('error', json_encode(file_get_contents('php://input')));
-		$postData = $this->arrayFromPost(array('UserName', 'UserPass', 'IsRemember', 'IsGetConfigs'));
+		$postData = $this->arrayFromPost(array('UserName', 'UserPass', 'IsRemember'));
 		$userName = $postData['UserName'];
 		$userPass = $postData['UserPass'];
 		if(!empty($userName) && !empty($userPass)) {
 			$configs = array();
 			$user = $this->Musers->login($userName, $userPass);
 			if ($user) {
-				if(empty($user['Avatar'])) $user['Avatar'] = NO_IMAGE;
+				// if(empty($user['Avatar'])) $user['Avatar'] = NO_IMAGE;
 				$this->session->set_userdata('user', $user);
-				if ($postData['IsGetConfigs'] == 1) {
-					$this->load->model('Mconfigs');
-					$configs = $this->Mconfigs->getListMap();
-					$this->session->set_userdata('configs', $configs);
-				}
+                
 				if ($postData['IsRemember'] == 'on') {
 					$this->load->helper('cookie');
 					$this->input->set_cookie(array('name' => 'userName', 'value' => $userName, 'expire' => '86400'));
 					$this->input->set_cookie(array('name' => 'userPass', 'value' => $userPass, 'expire' => '86400'));
 				}
                 $user['SessionId'] = uniqid();
-				echo json_encode(array('code' => 1, 'message' => "Đăng nhập thành công", 'data' => array('User' => $user, 'Configs' => $configs, 'message' => "Đăng nhập thành công")));
+				echo json_encode(array('code' => 1, 'message' => "Đăng nhập thành công", 'data' => array('User' => $user, 'message' => "Đăng nhập thành công")));
 			}
 			else echo json_encode(array('code' => 0, 'message' => "Đăng nhập không thành công"));
 		}

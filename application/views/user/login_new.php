@@ -12,10 +12,11 @@
         <label><i class="ion-locked"></i></label>
     </div>
     <button type="submit" class="btn btn-gr btn-block btn-flat">Đăng nhập</button>
-    <input type="text" hidden="hidden" name="IsGetConfigs" value="1">
     <input type="text" hidden="hidden" name="IsRemember" value="on">
+     <input type="text" hidden="hidden" name="IsGetConfigs" value="1">
     <?php echo form_close(); ?>
-    <input type="hidden" id="siteName" value="Ricky">
+     <input type="hidden" id="dashboardUrl" value="<?php echo base_url('user/staff'); ?>">
+    <input type="hidden" id="siteName" value="">
 </div>
 </div>
 <noscript><meta http-equiv="refresh" content="0; url=<?php echo base_url('user/permission'); ?>" /></noscript>
