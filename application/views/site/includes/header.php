@@ -23,6 +23,7 @@
     </head>
     <body>
         <!-- navigation -->
+        <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
         <input type="hidden" id="urlGetWin" value="<?php echo base_url('site/ajaxUserWin'); ?>">
                 <input type="hidden" id="urlReceiveCard" value="<?php echo base_url('site/receiveCard') ?>">
                 <input type="hidden" id="urlShare" value="<?php echo base_url('ban-da-chia-se-ket-qua-du-doan-la/') ?>">

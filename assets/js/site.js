@@ -40,6 +40,7 @@ app.initLibrary = function(){
 
 app.submit = function(){
 	$("body").on('click', '.submit', function(){
+
 		if (validateEmpty('#inputNumberForm')) {
     		var form = $('#inputNumberForm');
     		$.ajax({
@@ -49,11 +50,12 @@ app.submit = function(){
                 success: function (response) {
                     var json = $.parseJSON(response);
                     if(json.code == 1){
-                        var urlShare = $("input#urlShare").val()+'/'+json.number;
-                        $(".fb-share-button").attr("data-href", urlShare);
+                        // var urlShare = $("input#urlShare").val()+'/'+json.number;
+                        // $(".fb-share-button").attr("data-href", urlShare);
                     }
                     showNotification(json.message, json.code);
                     $("#inputNumberForm input").val('');
+                    location.reload();
                 },
                 error: function (response) {
                     showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
