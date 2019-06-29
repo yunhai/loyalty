@@ -22,3 +22,6 @@ ERROR - 2019-06-27 18:00:08 --> 404 Page Not Found: Assets/vendor
 ERROR - 2019-06-27 18:00:33 --> 404 Page Not Found: User/dashboard
 ERROR - 2019-06-27 18:16:16 --> 404 Page Not Found: User/dashboard
 ERROR - 2019-06-27 18:16:27 --> 404 Page Not Found: Assets/vendor
+ERROR - 2019-06-27 18:44:18 --> 404 Page Not Found: Assets/vendor
+ERROR - 2019-06-27 18:44:22 --> 404 Page Not Found: Assets/vendor
+ERROR - 2019-06-27 18:45:00 --> 404 Page Not Found: Assets/vendor

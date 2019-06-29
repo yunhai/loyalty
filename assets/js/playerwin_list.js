@@ -82,7 +82,7 @@ function renderContents(data){
             html += '<td>'+ data[item].InfoCard +'</td>';
             html += '<td>'+ data[item].UserCardUse +'</td>'; 
             html += '<td class="text-center">';
-            if(parseInt(data[item].CardActiveId) != 3) html += '<a href="javascript:void(0)" style="color:#ffffff" class="btn btn-success btn-xs btnShowModal "  data-id="'+data[item].CustomersAnticipateId+'">Add Card</a>';
+            html += data[item].AddCard;
             html +='</td>';
             html += '</tr>';
         }

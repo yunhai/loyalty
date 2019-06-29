@@ -9,25 +9,28 @@
         <!-- //meta tags -->
         <!-- custom Theme files -->
         <link href="assets/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-        <link rel="stylesheet" href="assets/vendor/plugins/pnotify/pnotify.custom.min.css"/>
+        
         <link href="assets/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link rel="stylesheet" href="assets/vendor/plugins/pnotify/pnotify.custom.min.css"/>
         <!-- //custom Theme files -->
         <!-- js -->
         <script src="assets/web/js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
         <!-- web-fonts -->
         <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900&display=swap&subset=vietnamese" rel="stylesheet">
         <!-- //web-fonts --> 
     </head>
     <body>
         <!-- navigation -->
-        <div class="side_menu">
-            <div class="burger_box visible-xs">
-                <input type="hidden" id="urlGetWin" value="<?php echo base_url('site/ajaxUserWin'); ?>">
+        <input type="hidden" id="urlGetWin" value="<?php echo base_url('site/ajaxUserWin'); ?>">
                 <input type="hidden" id="urlReceiveCard" value="<?php echo base_url('site/receiveCard') ?>">
                 <input type="hidden" id="urlShare" value="<?php echo base_url('ban-da-chia-se-ket-qua-du-doan-la/') ?>">
+        <!-- navigation -->
+        <div class="side_menu">
+            <div class="burger_box visible-xs">
                 <div class="menu-icon-container">
-                    <a href="<?php echo base_url() ?>" class="menu-icon js-menu_toggle closed">
+                    <a href="#" class="menu-icon js-menu_toggle closed">
                     <span class="menu-icon_box">
                     <span class="menu-icon_line menu-icon_line--1"></span>
                     <span class="menu-icon_line menu-icon_line--2"></span>
@@ -40,10 +43,10 @@
                 <h2 class="menu_title">Tài khoản</h2>
                 <ul class="list_load">
                     <li class="list_item reward-notification">
-                        <p>Bạn được nhận thưởng</p>
+                        <p>Bạn đượcnhận thưởng</p>
                         <span class="bg-money">0</span>
                     </li>
-                    <li class="list_item"><a href="#" class="dropdown-item"><span class="fa-power-off-white"></span>Thoát tài khoản</a></li>
+                    <li class="list_item"><a href="<?php echo base_url('site/logout'); ?>" class="dropdown-item"><span class="fa-power-off-white"></span>Thoát tài khoản</a></li>
                 </ul>
             </div>
         </div>
@@ -54,7 +57,12 @@
                     <span class="pull-left">Bạn được<br>nhận thưởng</span>
                     <span class="bg-money">0</span>
                 </div>
-                <?php endif; ?>
+                <div class="header-w3right">
+                    <ul>
+                        <li class=""><a href="<?php echo base_url('site/logout'); ?>" ><span class="fa-power-off-white"></span>Thoát tài khoản</a></li>
+                    </ul>
+                </div>
+                <?php else: ?>
                 <div class="header-w3right">
                     <ul>
                         <li><a class="scrollTo login" href="#form-guess">ĐĂNG NHẬP</a></li>
@@ -62,6 +70,7 @@
                         <li><a class="scrollTo register" href="#form-guess">ĐĂNG KÝ</a></li>
                     </ul>
                 </div>
+                <?php endif; ?>
                 <div class="clearfix"></div>
             </div>
             <div class="account-login visible-xs"><a class="scrollTo" href="#form-guess" href="#"><span class="fa-account-yellow"></span></a></div>

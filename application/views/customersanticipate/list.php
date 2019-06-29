@@ -11,7 +11,7 @@
                         <li class="active" id="liFilter_0"><a href="#tab_0" data-id="0" data-toggle="tab" aria-expanded="true">Tất cả</a></li>
                     </ul>
                 </div>
-                <div class="input-group margin ctrl-filter updaten">
+                <div class="input-group margin ctrl-filter updaten"  style="display: none">
                     <div class="input-group-btn dropdown" id="searchGroup">
                         <div class="dropdown-menu mt10 pos-arrow-dropdown animate-scale-dropdown" role="menu">
                             <form class="form-inline">

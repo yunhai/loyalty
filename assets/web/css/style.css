@@ -137,7 +137,7 @@ label {
 
 .header {
     position: relative;
-    background: transparent url(../img/bg-header.png) center no-repeat;
+    background: transparent url(../img/bg-header.png) center repeat-x;
     height: 140px;
     position: relative;
     z-index: 10;
@@ -535,7 +535,7 @@ h2.menu_title {
 
 .banner-agileinfo h4 {
     color: #fff;
-    font-size: 43px;
+    font-size: 41px;
     margin: 0;
     text-align: center;
     font-family: Montserrat;
@@ -825,6 +825,13 @@ ul.callbacks_tabs.callbacks2_tabs {
     position: relative;
 }
 
+.services .input-group-t {
+    top: 54%;
+    width: 100%;
+    text-align: center;
+    margin-top: 2.7rem;
+}
+
 .services h2 {
     text-align: center;
     font-family: 'Anton';
@@ -844,34 +851,32 @@ ul.callbacks_tabs.callbacks2_tabs {
     color: #deac47;
 }
 
-.services .services-left {
-    position: absolute;
-    top: 54%;
-    left: 43.5%;
-}
-
+.services .services-left,
 .services .services-right {
-    position: absolute;
-    top: 54%;
-    right: 43.5%;
+    display: inline-block;
+    padding: 0 10px;
 }
 
 .services .services-left input,
 .services .services-right input {
+    font-weight: bold;
     background-color: transparent;
     text-align: center;
     color: #fff;
     font-size: 50px;
-    width: 80px;
+    width: 100%;
     border: none;
-    height: 80px;
-    line-height: 80px;
+    height: 100%;
     font-family: 'roboto';
+    padding:0;
+    border: 2px solid #f2cc53;
+    border-radius: 50px;
 }
 
 .services .services-left input:focus,
 .services .services-right input:focus {
-    border: none;
+    border: 2px solid #f2cc53;
+    border-radius: 50px;
     outline: none;
 }
 
@@ -943,8 +948,8 @@ ul.callbacks_tabs.callbacks2_tabs {
     height: 48px;
     color: #fff;
     font-weight: 600;
-    text-indent: 40px;
     line-height: 28px;
+    text-align: center;
 }
 
 .rewarded table tbody>tr>td {
@@ -1052,10 +1057,21 @@ ul.callbacks_tabs.callbacks2_tabs {
 
 
 /*form register*/
+.phone-input-group {
+    position: relative;
+}
+.phone-input-group label {
+    color: #aaa;
+    position: absolute;
+    top: 25%;
+    left: 10px;
+    font-size: 14px;
+    line-height: 20px;
+}
 
 .phone-input {
-    background: #fff url(../img/bg-phone-input.jpg) center left no-repeat;
-    text-indent: 42px;
+    text-indent: 40px;
+    background: #fff url(../img/bg-phone-input.jpg) no-repeat left;
 }
 
 .form-guess .nav-tabs>li>a:hover,
@@ -1120,7 +1136,6 @@ ul.callbacks_tabs.callbacks2_tabs {
     position: relative;
     z-index: 1;
     color: #fff;
-    border: 2px solid #f2cc53;
     line-height: 4.5em;
 }
 
@@ -1139,13 +1154,6 @@ ul.callbacks_tabs.callbacks2_tabs {
     font-size: 25px;
     display: block;
 }
-
-
-/* //end form-gues */
-
-
-/* Effect 8 */
-
 .serw3agile-grid .hi-icon {
     background: #450100;
     -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
@@ -1230,6 +1238,12 @@ ul.callbacks_tabs.callbacks2_tabs {
 }
 
 
+/* //end form-gues */
+
+
+/* Effect 8 */
+
+
 /*-- //services --*/
 
 
@@ -1245,6 +1259,20 @@ ul.callbacks_tabs.callbacks2_tabs {
 
 
 /*-- responsive --*/
+@media (min-width: 1800px) {
+    .container {
+        width: 1100px;
+    }
+    .banner {
+        min-height: 835px;
+    }
+    .banner-agileinfo {
+        margin-top: 340px;
+    }
+    .banner-agileinfo h4 {
+        font-size: 53px;
+    }
+}
 
 @media (max-width: 1080px) {
     .container {
@@ -1253,19 +1281,14 @@ ul.callbacks_tabs.callbacks2_tabs {
     .header .container {
         width: 900px;
     }
-    .services .services-right {
-        right: 38%;
-        top: 53%;
-    }
     .services h2 {
         margin-top: 90px;
     }
+    .services .input-group-t {
+        margin-top: 2.2rem;
+    }
     .services button {
         bottom: 105px;
-    }
-    .services .services-left {
-        left: 38%;
-        top: 53%;
     }
     .services {
         height: 590px;
@@ -1281,7 +1304,7 @@ ul.callbacks_tabs.callbacks2_tabs {
 @media (max-width: 991px) {
     .container,
     .header .container {
-        width: 750px;
+        width: 770px;
     }
     .banner {
         min-height: 520px;
@@ -1324,6 +1347,9 @@ ul.callbacks_tabs.callbacks2_tabs {
     .services-right {
         padding: 0 10px;
     }
+    .services .input-group-t {
+        margin-top: 1rem;
+    }
     .banner {
         margin-top: -30px;
         height: 240px;
@@ -1340,7 +1366,7 @@ ul.callbacks_tabs.callbacks2_tabs {
         font-size: 13px;
     }
     .container {
-        width: 370px;
+        width: 360px;
     }
     .header {
         height: 80px;
@@ -1365,18 +1391,10 @@ ul.callbacks_tabs.callbacks2_tabs {
         width: 140px;
         margin-left: -70px;
     }
-    .services .services-left {
-        top: 52%;
-        left: 33%;
-    }
-    .services .services-right {
-        top: 52%;
-        right: 33%;
-    }
     .services .services-left input,
     .services .services-right input {
-        height: 37px;
-        width: 37px;
+        height: 100%;
+        width: 100%;
         font-size: 30px;
         line-height: 37px;
     }
@@ -1442,6 +1460,9 @@ ul.callbacks_tabs.callbacks2_tabs {
         padding-left: 15px;
         padding-right: 15px;
     }
+    .phone-input-group label {
+        top: 20%;
+    }
     .banner {
         margin-top: -30px;
         height: 240px;
@@ -1461,11 +1482,25 @@ ul.callbacks_tabs.callbacks2_tabs {
         height: 290px;
         margin-top: -30px;
     }
+    .footer img {
+        height: 40px;
+    }
 }
 
 @media (max-width: 320px) {
     .container {
         width: 320px;
+    }
+    .banner {
+        margin-top: -30px;
+        height: 200px;
+        min-height: 1px;
+    }
+    .banner-agileinfo {
+        margin-top: 80px;
+    }
+    .banner-agileinfo h4 {
+        font-size: 18px;
     }
     .nav>li>a {
         padding: 10px 0px !important;

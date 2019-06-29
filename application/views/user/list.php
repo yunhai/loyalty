@@ -13,7 +13,7 @@
                         <li class="active" id="liFilter_0"><a href="#tab_0" data-id="0" data-toggle="tab" aria-expanded="true">Tất cả</a></li>
                     </ul>
                 </div>
-                <div class="input-group margin ctrl-filter updaten">
+                <div class="input-group margin ctrl-filter updaten"  style="display: none">
                     <div class="input-group-btn dropdown" id="searchGroup">
                         <div class="dropdown-menu mt10 pos-arrow-dropdown animate-scale-dropdown" role="menu">
                             <form class="form-inline">
@@ -36,12 +36,10 @@
                         <table class="table new-style table-hover table-bordered" id="table-data">
                             <thead>
                             <tr>
-                                <th style="width: 60px"><input type="checkbox" class="iCheckTable" id="checkAll"></th>
                                 <th>Họ và tên</th>
                                 <th>Sô điện thoại</th>
                                 <th>Email</th>
                                 <th>Ngày đăng ký</th>
-                                <th class="text-center">Trạng thái</th>
                                 <th class="text-center">Hành động</th>
                             </tr>
                             </thead>

@@ -22,6 +22,12 @@ class Site extends MY_Controller {
         $this->load->view('site/home', array('user' =>$user));
 	}
 
+	public function logout(){
+		$fields = array('user', 'configs');
+		foreach($fields as $field) $this->session->unset_userdata($field);
+		redirect();
+	}
+
 	public function update(){
 		$user = $this->checkUserLoginHome();
 		if($user){

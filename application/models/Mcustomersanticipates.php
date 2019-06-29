@@ -72,7 +72,7 @@ class Mcustomersanticipates extends MY_Model {
         $datas = $this->getByQuery($query, $dataBind);
         for ($i = 0; $i < count($datas); $i++) {
             $dayDiff = getDayDiff($datas[$i]['CrDateTime'], $now);
-            $datas[$i]['CrDateTime'] = ddMMyyyy($datas[$i]['CrDateTime'], $dayDiff > 2 ? 'd/m/Y' : '');
+            $datas[$i]['CrDateTime'] = ddMMyyyy($datas[$i]['CrDateTime'], 'd/m/Y');;
             $datas[$i]['DayDiff'] = $dayDiff;
         }
         $data = array();
@@ -108,7 +108,12 @@ class Mcustomersanticipates extends MY_Model {
             'lotteryresultdetails.Raffle',
             'lotteryresults.CrDateTime AS LrCrDateTime',
             'lotterystations.LotteryStationName',
-            'cards.*',
+            'cards.CardId',
+            'cards.CardNameId',
+            'cards.CardNumber',
+            'cards.CardSeri',
+            'cards.CardTypeId',
+            'COALESCE(cards.CardActiveId, 0) AS CardActiveId'
         ];
       
         $joins = [
@@ -147,7 +152,7 @@ class Mcustomersanticipates extends MY_Model {
         for ($i = 0; $i < count($datas); $i++) {
             $dayDiff = getDayDiff($datas[$i]['CrDateTime'], $now);
             $datas[$i]['LrCrDateTime'] = ddMMyyyy($datas[$i]['LrCrDateTime'],'d/m/Y');
-            $datas[$i]['CrDateTime'] = ddMMyyyy($datas[$i]['CrDateTime'], $dayDiff > 2 ? 'd/m/Y' : '');
+            $datas[$i]['CrDateTime'] = ddMMyyyy($datas[$i]['CrDateTime'], 'd/m/Y');
             $datas[$i]['DayDiff'] = $dayDiff;
             $datas[$i]['InfoCard'] = '';
             $datas[$i]['UserCardUse'] = '';
@@ -158,6 +163,14 @@ class Mcustomersanticipates extends MY_Model {
                 $datas[$i]['InfoCard'] .= '<p>- Number:'.$datas[$i]['CardNumber'].'</p>';
 
                 $datas[$i]['UserCardUse'] = $this->Mconstants->cardActive[$datas[$i]['CardActiveId']];
+                
+            }
+            $datas[$i]['AddCard'] = '';
+            if($datas[$i]['CardActiveId'] != 3){
+                if( $datas[$i]['CardActiveId'] != 4){
+                    $datas[$i]['AddCard'] = '<a href="javascript:void(0)" style="color:#ffffff" class="btn btn-success btn-xs btnShowModal "  data-id="'.$datas[$i]['CustomersAnticipateId'].'">Add Card</a>';
+                }
+                
             }
         }
         $data = array();

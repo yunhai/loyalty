@@ -63,7 +63,7 @@
                         </div>
                         
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" style="display: none">
                         <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title">

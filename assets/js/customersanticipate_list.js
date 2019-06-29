@@ -43,7 +43,7 @@ function renderContents(data){
             count ++;
             html += '<tr>';
             html += '<td>'+data[item].FullName+'</td>';
-            html += '<td>'+ getDayText(data[item].DayDiff) + data[item].CrDateTime +'</td>';
+            html += '<td>' + data[item].CrDateTime +'</td>';
             html += '<td>'+data[item].LotteryStationName+'</td>';
             html += '<td>'+data[item].Number+'</td>';
             html += '<td class="text-center">';
