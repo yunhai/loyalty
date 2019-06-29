@@ -1,29 +1,30 @@
 <?php $this->load->view('site/includes/header'); ?>
     <!-- services -->
     <div id="services" class="services">
-        <div class="container">
-            <h2>NHẬP SỐ DỰ ĐOÁN</h2>
-            <h3>CHỌN 2 SỐ VÀ NHẤN "<span>NHẬP SỐ</span>"</h3>
-            <?php echo form_open('site/update', array('id' => 'inputNumberForm')); ?>
-                <div class="services-left">
-                    <div class="serw3agile-grid">
-                        <span class="hi-icon hi-icon-archive glyphicon"><input type="text" name="NumberOne" maxlength="1" placeholder="$" value="" class="cost hmdrequired" data-field="Nhập số"> </span>
+            <div class="container">
+                <h2>NHẬP SỐ DỰ ĐOÁN</h2>
+                <h3>CHỌN 2 SỐ VÀ NHẤN "<span>NHẬP SỐ</span>"</h3>
+                <?php echo form_open('site/update', array('id' => 'inputNumberForm')); ?>
+                    <div class="input-group-t">
+                        <div class="services-left">
+                            <div class="serw3agile-grid">
+                                <span class="hi-icon hi-icon-archive glyphicon"><input type="text" name="NumberOne" maxlength="1" placeholder="$" value="" class="cost hmdrequired" data-field="Nhập số"> </span>
+                            </div>
+                        </div>
+                        <div class="services-right">
+                            <div class="serw3agile-grid">
+                                <span class="hi-icon hi-icon-archive glyphicon"> <input type="text" name="NumberTwo" maxlength="1" placeholder="$" class="cost hmdrequired" data-field="Nhập số"></span>
+                            </div>
+                        </div>
+                        <?php if($user): ?>
+                        <div class="fb-share-button" data-href="http://loyalty.client.webstarterz.com/ban-da-chia-se-ket-qua-du-doan-la/<?php echo $num; ?>" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                    <?php endif; ?>
                     </div>
-                </div>
-                <div class="services-right">
-                    <div class="serw3agile-grid">
-                        <span class="hi-icon hi-icon-archive glyphicon"> <input type="text" name="NumberTwo" maxlength="1" placeholder="$" class="cost hmdrequired" data-field="Nhập số"></span>
-                    </div>
-                   <?php if($user): ?>
-                        <div class="fb-share-button" data-href="http://loyalty.client.webstarterz.com/hello.jpg" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
-                <?php endif; ?>
-                </div>
-
-                <button type="submit" class="btn btn-primary submit">NHẬP SỐ</button>
-                 
-            <?php echo form_close(); ?>
+                    <button type="submit" class="btn btn-primary submit">NHẬP SỐ</button>
+                <?php echo form_close(); ?>
+            </div>
         </div>
-    </div>
+    
     <!-- //services -->
     <!-- rewarded -->
     <div id="rewarded" class="rewarded">
@@ -43,6 +44,7 @@
     </div>
     <!-- //rewarded -->
     <!-- guess -->
+    <?php if(!$user): ?>
     <div id="form-guess" class="form-guess">
         <div class="container">
             <h1 class="title">THAM GIA DỰ ĐOÁN LÔ ĐỀ!</h1>
@@ -63,12 +65,12 @@
                         </div>
                         <div class="col-md-6 text-left">
                             <label class="container">Nhớ tôi
-                                <input type="checkbox" checked="checked" class="checked-custom" name="IsRemember" value="on">
+                                <input type="checkbox" checked="checked" class="checked-custom" name="IsRemember" id="isRemember" value="on">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="javascript:void(0)">Quên mật khẩu</a>
+                            <a href="javascript:void(0)" id="forgotpass">Quên mật khẩu</a>
                         </div>
                         <div class="clearfix"></div>
                         <button type="submit" class="btn btn-primary">ĐĂNG NHẬP</button>
@@ -112,5 +114,6 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <!-- //guess -->
 <?php $this->load->view('site/includes/footer'); ?>

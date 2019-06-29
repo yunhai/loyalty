@@ -95,12 +95,11 @@ class Mcustomersanticipates extends MY_Model {
     public function searchByFilterWin($searchText, $itemFilters, $limit, $page, $userId = 0){
        
         //search theo text
-        $dateNow = getDateNow();
-        if(!empty($searchText)){
-            $dateNow = ddMMyyyyToDate($searchText, 'd/m/Y', 'Y-m-d');
-        }
+        // $dateNow = getDateNow();
+        $dateNow = '';
+
         $queryCount = "select customersanticipates.CustomersAnticipateId AS totalRow from customersanticipates {joins} where {wheres}";
-        $query = "select {selects} from customersanticipates {joins} where {wheres} ORDER BY customersanticipates.CustomersAnticipateId DESC LIMIT {limits}";
+        $query = "select {selects} from customersanticipates {joins} where {wheres} ORDER BY lotteryresults.CrDateTime DESC LIMIT {limits}";
         $selects = [
             'customersanticipates.*',
             'users.FullName',
@@ -124,7 +123,13 @@ class Mcustomersanticipates extends MY_Model {
             'lotteryresults' => "LEFT JOIN lotteryresults ON lotteryresults.LotteryStationId = lotterystations.LotteryStationId",
             'lotteryresultdetails' => "LEFT JOIN lotteryresultdetails ON lotteryresultdetails.LotteryResultId = lotteryresults.LotteryResultId",
         ];
-        $wheres = array("customersanticipates.CrDateTime = '".$dateNow."' AND lotteryresultdetails.Raffle = customersanticipates.Number AND lotteryresults.CrDateTime = '".$dateNow."' AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2");
+        if(!empty($searchText)){
+            $dateNow = ddMMyyyyToDate($searchText, 'd/m/Y', 'Y-m-d');
+            $wheres = array("customersanticipates.CrDateTime = '".$dateNow."' AND lotteryresultdetails.Raffle = customersanticipates.Number AND lotteryresults.CrDateTime = '".$dateNow."' AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2");
+        }else{
+            $wheres = array("lotteryresultdetails.Raffle = customersanticipates.Number AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2");
+        }
+        
         $dataBind = [];
        
         $whereSearch= '';
@@ -205,15 +210,16 @@ class Mcustomersanticipates extends MY_Model {
                 LEFT JOIN lotteryresults ON lotteryresults.LotteryStationId = lotterystations.LotteryStationId 
                 LEFT JOIN lotteryresultdetails ON lotteryresultdetails.LotteryResultId = lotteryresults.LotteryResultId 
                 where  lotteryresultdetails.Raffle = customersanticipates.Number 
-                AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2  ".$where." ORDER BY customersanticipates.CustomersAnticipateId";
+                AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2  ".$where." ORDER BY lotteryresults.CrDateTime";
         $datas = $this->getByQuery($query);
         if($flag){
             for ($i = 0; $i < count($datas); $i++) {
-                $datas[$i]['CardType'] = '<a class="receive-card" href="javascript:void(0)" data-id="'.$datas[$i]['CustomersAnticipateId'].'">Thẻ Cào Điện Thoại '.$this->Mconstants->typeCard[$datas[$i]['CardTypeId']].' VNĐ </a>';
+                $datas[$i]['CardType'] = '<a class="receive-card" href="javascript:void(0)" data-id="'.$datas[$i]['CustomersAnticipateId'].'">Thẻ Cào Điện Thoại '.priceFormat($this->Mconstants->typeCard[$datas[$i]['CardTypeId']]).' VNĐ </a>';
+                $datas[$i]['TotalPrice'] = intval($this->Mconstants->typeCard[$datas[$i]['CardTypeId']]);
             }
         }else{
             for ($i = 0; $i < count($datas); $i++) {
-                $datas[$i]['CardType'] = 'Thẻ Cào Điện Thoại '.$this->Mconstants->typeCard[$datas[$i]['CardTypeId']].' VNĐ';
+                $datas[$i]['CardType'] = 'Thẻ Cào Điện Thoại '.priceFormat($this->Mconstants->typeCard[$datas[$i]['CardTypeId']]).' VNĐ';
             }
         }
         
@@ -226,6 +232,13 @@ class Mcustomersanticipates extends MY_Model {
                 WHERE customersanticipates.CustomersAnticipateId = ? AND customersanticipates.UserId = ? AND customersanticipates.StatusId = ?";
         $datas = $this->getByQuery($query, array($customersAnticipateId, $userId, STATUS_ACTIVED));
         if($datas) return $datas[0]['CardId'];
+        else return 0;
+    }
+
+    public function getNum($userId){
+        $query = "SELECT `Number` from customersanticipates where UserId = ? AND StatusId = ? ORDER BY CustomersAnticipateId DESC";
+        $datas = $this->getByQuery($query, array($userId, STATUS_ACTIVED));
+        if($datas) return $datas[0]['Number'];
         else return 0;
     }
 

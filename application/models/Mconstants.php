@@ -22,11 +22,11 @@ class Mconstants extends CI_Model {
     );
 
     public $typeCard = array(
-        1 => '20,000',
-        2 => '50,000',
-        3 => '100,000',
-        4 => '200,000',
-        5 => '500,000'
+        1 => '20000',
+        2 => '50000',
+        3 => '100000',
+        4 => '200000',
+        5 => '500000'
     );
 
     public $cardActive = array(

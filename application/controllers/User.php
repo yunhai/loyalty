@@ -115,4 +115,41 @@ class User extends MY_Controller {
         $data = array_merge($data, $data1);
         echo json_encode($data);
     }
+
+    public function exportUser(){
+    	$user = $this->checkUserLogin();
+    	if($user['RoleId'] == 1){
+    		$listUsers = $this->Musers->getBy(array("StatusId" => STATUS_ACTIVED, "StatusId" => STATUS_ACTIVED));
+    		if(!empty($listUsers)) {
+    			
+    			$fileUrl = FCPATH . 'assets/uploads/excels/users.xls';
+    			$this->load->library('excel');
+    			$objReader = PHPExcel_IOFactory::createReader('Excel5');
+                $objPHPExcel = $objReader->load($fileUrl);
+                $objPHPExcel->setActiveSheetIndex(0);
+
+                $sheet = $objPHPExcel->getActiveSheet();
+              
+                $i = 2;
+                foreach($listUsers as $u) {
+                	$crDateTimec= ddMMyyyy($u['CrDateTime'], 'd/m/Y H:i');
+                	$sheet->setCellValue('A' . $i, $u['FullName']);
+                	$sheet->setCellValue('B' . $i, $u['PhoneNumber']);
+                	$sheet->setCellValue('C' . $i, $u['Email']);
+                	$sheet->setCellValue('D' . $i, $crDateTimec);
+                	$i++;
+                }
+                $cellIterator = $sheet->getRowIterator()->current()->getCellIterator();
+                $cellIterator->setIterateOnlyExistingCells(true);
+                $filename = "user_".date('Y-m-d').".xls";
+                header('Content-Type: application/vnd.ms-excel');
+                header('Content-Disposition: attachment;filename="' . $filename . '"');
+                header('Cache-Control: max-age=0');
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+                $objWriter->save('php://output');
+                $objPHPExcel->disconnectWorksheets();
+                unset($objPHPExcel);
+    		}else echo "<script>window.close();</script>";
+    	}else redirect(base_url());
+    }
 }

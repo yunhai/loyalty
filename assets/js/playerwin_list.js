@@ -41,7 +41,7 @@ $(document).ready(function(){
         return false;
     }).on('click', '.btn-search', function(){
         var date = $("input#itemSearchName").val();
-        if(date.trim() != ''){
+        // if(date.trim() != ''){
             $.ajax({
                 type: "POST",
                 url: $('button#btn-filter').attr('data-href'),
@@ -56,7 +56,7 @@ $(document).ready(function(){
                     showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
                 }
             });
-        }else showNotification("Vui lòng chọn ngày.", 0);
+        // }else showNotification("Vui lòng chọn ngày.", 0);
         return false;
     });
     

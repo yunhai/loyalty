@@ -56,7 +56,6 @@
                           <!-- Menu Footer-->
                           <li class="user-footer">
                             <div class="pull-left">
-                              <a href="<?php echo base_url('user/profile'); ?>" class="btn btn-default btn-flat">Tài khoản của bạn</a>
                             </div>
                             <div class="pull-right">
                               <a href="<?php echo base_url('user/logout'); ?>" class="btn btn-default btn-flat">Đăng xuất</a>

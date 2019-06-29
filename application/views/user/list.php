@@ -4,6 +4,7 @@
             <section class="content-header no-pd-lr">
                 <h1 class="ttl-list-order ft-seogeo"><?php echo $title; ?></h1>
                 <ul class="list-inline new-stl">
+                    <li><a  href="<?php echo base_url('user/exportUser'); ?>" class="btn btn-default">Xuất dữ liệu</a></li>
                     <li><a href="<?php echo base_url('user/add'); ?>"  class="btn btn-primary">Thêm Khách Hàng</a></li>
                 </ul>
             </section>
@@ -48,7 +49,7 @@
                     </div>
                     <input type="hidden" id="urlEdit" value="<?= base_url('user/edit') ?>">
                     <input type="hidden" id="urlDelete" value="<?= base_url('user/delete') ?>">
-
+                    <input type="text" hidden="hidden" id="exportUser" value="<?php echo base_url('user/exportUser'); ?>">
                 </div>
             </section>
         </div>

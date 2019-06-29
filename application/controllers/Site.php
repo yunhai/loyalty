@@ -19,7 +19,12 @@ class Site extends MY_Controller {
 
     public function index(){
     	$user = $this->session->userdata('user');
-        $this->load->view('site/home', array('user' =>$user));
+    	$num = 0;
+    	if($user){
+    		$this->load->model('Mcustomersanticipates');
+    		$num = $this->Mcustomersanticipates->getNum($user['UserId']);
+    	}
+        $this->load->view('site/home', array('user' =>$user, 'num' => $num));
 	}
 
 	public function logout(){
@@ -40,10 +45,10 @@ class Site extends MY_Controller {
 				$userId = $user['UserId'];
 				$flag = false;
 				if($dateNow <= date('Y-m-d 16:00:00')){
-					$flag = $this->Mcustomersanticipates->checkExist_1($userId, $dateNow);
+					$flag = $this->Mcustomersanticipates->checkExist_1($userId, date('Y-m-d 00:00:00',strtotime($dateNow)));
 				}
 				if($dateNow > date('Y-m-d 16:00:00')){
-					$flag = $this->Mcustomersanticipates->checkExist_2($userId, $tomorrow);
+					$flag = $this->Mcustomersanticipates->checkExist_2($userId,  date('Y-m-d 00:00:00',strtotime($tomorrow)));
 				}
 
 				if($flag){

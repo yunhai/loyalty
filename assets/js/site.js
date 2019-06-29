@@ -21,6 +21,14 @@ app.initLibrary = function(){
         	showNotification('Mỗi ô chỉ được nhập 1 số duy nhất', 0);
          	$(this).val('')
         } 
+    }).on("change", "#isRemember", function(){
+        if ($(this).is(':checked')){
+            $(this).val("on")
+        }else{
+            $(this).val("off")
+        }
+    }).on("click", "#forgotpass", function(){
+        alert("Liên hệ Admin, để được cấp lại mật khẩu.");
     });
 
     function checkKeyCodeNumber(e){
@@ -170,13 +178,16 @@ app.userWin = function(){
             if(json.code == 1){
                 var data = json.data;
                 var html = '';
+                var num = 0;
                 for (var item = 0; item < data.length; item++) {
                     html += '<tr>';
                     html += '<td class="text-indent">'+data[item].FullName+'</td>';
                     html += '<td class="text-center">'+data[item].CardType+'</td>'
                     html += '</tr>';
+                    num += data[item].TotalPrice;
+                    
                 }
-                console.log(html)
+                $(".bg-money").html(formatNumber(num));
                 $("#tbody-bac").html(html);
             }
         },
@@ -184,6 +195,9 @@ app.userWin = function(){
             showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
         }
     });
+}
+function formatNumber (num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 }
 
 $(document).ready(function(){
