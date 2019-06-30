@@ -1,5 +1,4 @@
- <!-- footer -->
-        <div class="footer">
+<div class="footer">
             <div class="container">
                 <div class="text-center">
                     <a href="javascript:void(0)"><img src="assets/web/img/logo-footer.jpg"></a>

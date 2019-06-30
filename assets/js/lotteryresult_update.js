@@ -3,7 +3,6 @@ var app = app || {};
 app.init = function () {
     app.initLibrary();
     app.submit();
-    app.addDetail();
 };
 
 app.initLibrary = function(){
@@ -20,24 +19,6 @@ app.initLibrary = function(){
     });
 };
 
-app.addDetail = function(){
-	 var variantValues = [];
-        variantValues[1] = [];
-	$('.addDetail').click(function () {
-        var raffletNo = parseInt($('input#raffletNo').val()) + 1;
-        var html = '<tr><td><input type="text" class="form-control  raffle cost hmdrequired" id="raffle_' + raffletNo + '" data-field="Kết quả"></td><td><a href="javascript:void(0)" class="link_delete" data-id="' + raffletNo + '"><i class="fa fa-times" title="Xóa"></i></a></td></tr>';
-        $('#tbodyDetails').append(html);
-         variantValues[raffletNo] = [];
-        $('input#raffletNo').val(raffletNo);
-    });
-
-    $('#tbodyDetails').on('click', '.link_delete', function () {
-        var raffletNo = parseInt($(this).attr('data-id'));
-        variantValues.splice(raffletNo, 1);
-        $(this).parent().parent().remove();
-        return false;
-    });
-};
 
 app.submit = function(){
     $('.submit').click(function(){
@@ -49,16 +30,12 @@ app.submit = function(){
                 return false;
             }
 
-            var detailObj = getLotteryResultDetails();
-
             btn.prop('disabled', true);
             var form = $('#lotteryresultForm');
-            var datas = form.serializeArray();
-            datas.push({name: 'LotteryResultDetails', value:  JSON.stringify(detailObj)});
             $.ajax({
                 type: "POST",
                 url: form.attr('action'),
-                data: datas,
+                data: form.serialize(),
                 success: function (response) {
                     var json = $.parseJSON(response);
                     showNotification(json.message, json.code);

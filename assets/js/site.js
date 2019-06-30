@@ -27,8 +27,6 @@ app.initLibrary = function(){
         }else{
             $(this).val("off")
         }
-    }).on("click", "#forgotpass", function(){
-        alert("Liên hệ Admin, để được cấp lại mật khẩu.");
     });
 
     function checkKeyCodeNumber(e){
@@ -49,13 +47,11 @@ app.submit = function(){
                 data: form.serialize(),
                 success: function (response) {
                     var json = $.parseJSON(response);
-                    if(json.code == 1){
-                        // var urlShare = $("input#urlShare").val()+'/'+json.number;
-                        // $(".fb-share-button").attr("data-href", urlShare);
-                    }
                     showNotification(json.message, json.code);
                     $("#inputNumberForm input").val('');
-                    location.reload();
+                    if(json.code == 1){
+                        setInterval(function(){ location.reload(); }, 3000);
+                    }
                 },
                 error: function (response) {
                     showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
@@ -70,6 +66,7 @@ app.submit = function(){
 app.login = function(){
     $(document).on('submit','#userForm',function (){
         if(validateEmpty('#userForm')) {
+
             var form = $('#userForm');
             var data = form.serialize();
             form.find('input, button').prop("disabled", true);
@@ -79,9 +76,13 @@ app.login = function(){
                 url: form.attr('action'),
                 data: data,
                 success: function (response) {
-                    var json = response;// $.parseJSON(response);
+                    var json = response;
+
                     showNotification(json.message, json.code);
-                    location.reload();
+                    if(json.code == 1){
+                        setInterval(function(){ location.reload(); }, 3000);
+                    }
+                    
                 },
                 error: function (response) {
                     showNotification('Có lỗi xảy ra trong quá trình thực hiện', 0);
@@ -115,7 +116,7 @@ app.receiveCard = function(){
                         if(confirm('Vui lòng nhận card: mã:'+data.CardNumber)){
 
                         }
-
+                        app.userWin()
 
                     }
                 },
@@ -131,6 +132,20 @@ app.receiveCard = function(){
 app.register = function(){
     $(document).on('click','#btnRegister',function (){
         if(validateEmpty('#userRegisterForm')){
+            var questionId = $('select#questionId').val();
+            if(parseInt(questionId) == 0){
+                showNotification('Vui lòng chọn câu hỏi.', 0);
+                 return false;
+            }
+            var answerId = $('select#answerId').val();
+            if(parseInt(answerId) == 0){
+                showNotification('Vui lòng chọn câu trả lời.', 0);
+                return false;
+            }
+            if(parseInt(answerId) > 0 && parseInt(questionId) == 0){
+                showNotification('Vui lòng chọn câu hỏi trước.', 0);
+                return false;
+            }
             if ($('input#userPass').val() != $('input#rePass').val()) {
                 showNotification('Mật khẩu không trùng', 0);
                 return false;
@@ -150,6 +165,8 @@ app.register = function(){
                     GenderId:   1,
                     StatusId:   2,
                     PhoneNumber: $('input#phoneNumber').val(),
+                    QuestionId : questionId,
+                    AnswerId: answerId
                 },
                 success: function (response) {
                     var json = $.parseJSON(response);
@@ -175,22 +192,26 @@ app.userWin = function(){
         type: "POST",
         url: $("input#urlGetWin").val().trim(),
         success: function (response) {
-            console.log(response)
+          
             var json = $.parseJSON(response);
             if(json.code == 1){
                 var data = json.data;
                 var html = '';
                 var num = 0;
-                for (var item = 0; item < data.length; item++) {
-                    html += '<tr>';
-                    html += '<td class="text-indent">'+data[item].FullName+'</td>';
-                    html += '<td class="text-center">'+data[item].CardType+'</td>'
-                    html += '</tr>';
-                    num += data[item].TotalPrice;
-                    
+                if(data.length > 0){
+                    for (var item = 0; item < data.length; item++) {
+                        html += '<tr>';
+                        html += '<td class="text-indent">'+data[item].FullName+'</td>';
+                        html += '<td class="text-center">'+data[item].CardType+'</td>'
+                        html += '</tr>';
+                        num += data[item].TotalPrice;
+                        
+                    }
+                    $(".bg-money").html(formatNumber(num));
+                    $("#tbody-bac").html(html);
+                    $("#container-bac").show();
                 }
-                $(".bg-money").html(formatNumber(num));
-                $("#tbody-bac").html(html);
+                
             }
         },
         error: function (response) {

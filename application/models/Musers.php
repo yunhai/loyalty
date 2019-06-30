@@ -41,6 +41,13 @@ class Musers extends MY_Model {
         return false;
     }
 
+    public function checkExistForGot($data){
+        $query = "SELECT UserId FROM users WHERE StatusId= 2 AND FullName = ? AND Email = ? AND PhoneNumber = ? AND AnswerId = ? AND QuestionId = ?";
+        $users = $this->getByQuery($query, array($data['FullName'], $data['Email'], $data['PhoneNumber'], $data['AnswerId'], $data['QuestionId']));
+        if($users) return $users[0]['UserId'];
+        else return 0;
+    }
+
 
 
     public function checkStaffExist($staffId, $phoneNumber, $ceoId){ // roleId = 3

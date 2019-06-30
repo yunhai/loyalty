@@ -9,36 +9,6 @@ class Mlotteryresults extends MY_Model {
         $this->_primary_key = "LotteryResultId";
     }
 
-    public function update($postData = array(), $lotteryResultId = 0, $lotteryResultDetails = array()){
-    	$isUpdate = $lotteryResultId > 0;
-        $this->db->trans_begin();
-        $lotteryResultId = $this->save($postData, $lotteryResultId);
-        if($lotteryResultId > 0){
-        	$categoryItems = array();
-        	if($isUpdate){
-        		$this->db->delete('lotteryresultdetails', array('LotteryResultId' => $lotteryResultId));
-        	}
-        	$lotteryresultdetails = array();
-            if(!empty($lotteryResultDetails)){
-            	
-                foreach($lotteryResultDetails as $d){
-                    $lotteryresultdetails[] = array(
-                        'LotteryResultId' => $lotteryResultId,
-                        'Raffle' => $d['Raffle'],
-                    );
-                }
-            }
-            if(!empty($lotteryresultdetails)) $this->db->insert_batch('lotteryresultdetails', $lotteryresultdetails);
-        }
-        if ($this->db->trans_status() === false){
-            $this->db->trans_rollback();
-            return 0;
-        }
-        else{
-            $this->db->trans_commit();
-            return $lotteryResultId;
-        }
-    }
 
     public function searchByFilter($searchText, $itemFilters, $limit, $page, $userId = 0){
         $queryCount = "select lotteryresults.LotteryResultId AS totalRow from lotteryresults  where {wheres}";
@@ -78,16 +48,11 @@ class Mlotteryresults extends MY_Model {
         }
         $now = new DateTime(date('Y-m-d'));
         $datas = $this->getByQuery($query, $dataBind);
-        $this->load->model(array('Mlotteryresultdetails', 'Mlotterystations'));
+        $this->load->model(array('Mlotterystations'));
         for ($i = 0; $i < count($datas); $i++) {
             $dayDiff = getDayDiff($datas[$i]['CrDateTime'], $now);
             $datas[$i]['CrDateTime'] = ddMMyyyy($datas[$i]['CrDateTime'], $dayDiff > 2 ? 'd/m/Y' : '');
             $datas[$i]['DayDiff'] = $dayDiff;
-            $lotteryresultdetails = $this->Mlotteryresultdetails->getBy(array('LotteryResultId' => $datas[$i]['LotteryResultId']));
-            $datas[$i]['LotteryResultDetails'] = '';
-            for($y = 0; $y < count($lotteryresultdetails); $y++){
-            	$datas[$i]['LotteryResultDetails'] .= '<p> - '.$lotteryresultdetails[$y]['Raffle'].'<p>';
-            }
             $datas[$i]['LotteryName'] = $this->Mlotterystations->getFieldValue(array('LotteryStationId' => $datas[$i]['LotteryStationId']), 'LotteryStationName', '');
         }
         $data = array();

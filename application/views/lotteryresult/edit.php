@@ -41,36 +41,15 @@
 			                                <thead class="theadNormal">
 			                                <tr>
 			                                    <th style="width: 150px;">Kết quả (*)</th>
-			                                    <th style="width: 5px;"></th>
 			                                </tr>
 			                                </thead>
 			                                <tbody id="tbodyDetails">
-			                                <?php $i = 0;
-                                    			if(empty($lotteryresultdetails)):
-                                        		$i = 1; 
-                                        	?>
                                         	<tr>
-			                                    <td><input type="text" class="form-control raffle cost hmdrequired" id="raffle_1" data-field="Kết quả"></td>
-			                                    <td><a href="javascript:void(0)" class="link_delete" data-id="1"><i class="fa fa-times" title="Xóa"></i></a></td>
-			                                </tr>
-                                        	<?php else: ?>
-			                                
-			                                <?php foreach ($lotteryresultdetails as $key => $value): $i++; ?>
-			                                <tr>
-			                                    <td><input type="text" class="form-control raffle cost hmdrequired" id="raffle_<?php echo $i; ?>" data-field="Kết quả" value="<?php echo $value['Raffle'] ?>"></td>
-			                                    <td><a href="javascript:void(0)" class="link_delete" data-id="1"><i class="fa fa-times" title="Xóa"></i></a></td>
-			                                </tr>
-			                            	<?php endforeach; endif; ?>
+			                                    <td><input type="text" class="form-control raffle cost hmdrequired" name="Raffle" id="raffle_1" data-field="Kết quả" value="<?php echo $lotteryresult['Raffle'] ?>"></td>
 			                                </tbody>
 			                            </table>
 			                        </div>
                         		</div>
-                        	</div>
-                        	<div class="row">
-                        		<ul class="list-inline pull-right margin-right-10">
-                        			<input type="text" hidden="hidden" id="raffletNo" value="<?php echo $i; ?>1">
-		                        	<li><button class="btn btn-primary addDetail" type="button">Thêm</button></li>
-		                        </ul>
                         	</div>
                         </div>
                         <input type="hidden" id="lotteryResultId"  name="LotteryResultId" value="<?php echo $lotteryresult['LotteryResultId'] ?>">

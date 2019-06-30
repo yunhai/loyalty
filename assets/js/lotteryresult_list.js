@@ -45,7 +45,7 @@ function renderContentLotteryResults(data){
             html += '<tr id="trItem_' + data[item].LotteryResultId + '" class="trItem">';
             html += '<td>'+data[item].LotteryName+'</td>';
             html += '<td>'+ getDayText(data[item].DayDiff) + data[item].CrDateTime +'</td>';
-            html += '<td>'+data[item].LotteryResultDetails+'</td>';
+            html += '<td>'+data[item].Raffle+'</td>';
             html += '<td class="text-center">';
             html += '<a href="'+urlEdit+data[item].LotteryResultId+'"  class="font-fix-1 text-primary"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;';
             html += '<a href="javascript:void(0)"  class="font-fix-1 text-danger link_delete" data-id="'+data[item].LotteryResultId+'"><i class="fa fa-trash"></i></a>';

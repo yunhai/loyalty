@@ -5,9 +5,9 @@ class User extends MY_Controller {
 
 	public function saveUser(){
 		$user = $this->session->userdata('user');
-		$postData = $this->arrayFromPost(array('UserName','UserPass','FullName', 'Email','PhoneNumber'));
+		$postData = $this->arrayFromPost(array('UserName','UserPass','FullName', 'Email','PhoneNumber', 'AnswerId', 'QuestionId'));
 		$userId = $this->input->post('UserId');
-		if(!empty($postData['FullName']) && !empty($postData['PhoneNumber'])) {
+		if(!empty($postData['FullName']) && !empty($postData['PhoneNumber']) && !empty($postData['Email']) && $postData['AnswerId'] > 0 && $postData['QuestionId'] > 0) {
 			if ($this->Musers->checkExist($userId, $postData['Email'], $postData['PhoneNumber'])) {
 				echo json_encode(array('code' => -1, 'message' => "Số điện thoại hoặc Email đã tồn tại trong hệ thống"));
 			}
@@ -39,7 +39,30 @@ class User extends MY_Controller {
 			}
 		}
 		else echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+
 	}
+
+    public function forGotPass(){
+        $postData = $this->arrayFromPost(array('UserName','FullName', 'Email','PhoneNumber', 'AnswerId', 'QuestionId'));
+        if(!empty($postData['FullName']) && !empty($postData['PhoneNumber']) && !empty($postData['Email']) && $postData['AnswerId'] > 0 && $postData['QuestionId'] > 0) {
+            $flag = $this->Musers->checkExistForGot($postData);
+            if ($flag == 0) {
+                echo json_encode(array('code' => -1, 'message' => "Thông tin cung cấp không chính xác"));
+            }else{
+                $newPass = trim($this->input->post('UserPass'));
+                
+                $update = array(
+                    "UpdateUserId" => $flag,
+                    "UpdateDateTime" => getCurentDateTime(),
+                );
+                if (!empty($newPass)) $update['UserPass'] = md5($newPass);
+
+                $userId = $this->Musers->save($update, $flag);
+                if ($userId > 0) echo json_encode(array('code' => 1, 'message' => "Đổi mật khẩu thành công."));
+                else echo json_encode(array('code' => 0, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+            }
+        }else echo json_encode(array('code' => -1, 'message' => "Vui lòng nhập đầy đủ thông tin"));
+    }
 
 	public function checkLogin(){
         // header('Access-Control-Allow-Origin: *');

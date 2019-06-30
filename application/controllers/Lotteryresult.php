@@ -57,7 +57,6 @@ class Lotteryresult extends MY_Controller {
                         $data['lotteryStationList'] = $this->Mlotterystations->getBy(array());
                         $data['lotteryresult'] = $lotteryresult;
                         $data['lotteryResultId'] = $lotteryResultId;
-                        $data['lotteryresultdetails'] = $this->Mlotteryresultdetails->getBy(array('LotteryResultId' => $lotteryResultId));
                     }else{
                         $data['lotteryResultId'] = 0;
                         $data['txtError'] = "Không tìm thấy trang";
@@ -73,14 +72,13 @@ class Lotteryresult extends MY_Controller {
     public function update(){
         $user = $this->checkUserLogin();
         if($user['RoleId'] == 1){
-            $postData = $this->arrayFromPost(array('LotteryStationId', 'CrDateTime'));
-            $lotteryResultDetails = json_decode(trim($this->input->post('LotteryResultDetails')), true);
-            if(!empty($postData['CrDateTime']) && $postData['LotteryStationId'] > 0 && !empty($lotteryResultDetails)){
+            $postData = $this->arrayFromPost(array('LotteryStationId', 'CrDateTime', 'Raffle'));
+            if(!empty($postData['CrDateTime']) && $postData['LotteryStationId'] > 0){
                 $lotteryResultId = $this->input->post('LotteryResultId');
                 $this->load->model('Mlotteryresults');
                 $postData['StatusId'] = STATUS_ACTIVED;
                 if (!empty($postData['CrDateTime'])) $postData['CrDateTime'] = ddMMyyyyToDate($postData['CrDateTime']);
-                $lotteryResultId = $this->Mlotteryresults->update($postData, $lotteryResultId, $lotteryResultDetails);
+                $lotteryResultId = $this->Mlotteryresults->save($postData, $lotteryResultId);
                 if ($lotteryResultId > 0) echo json_encode(array('code' => 1, 'message' => "Cập nhật thành công", 'data' => $lotteryResultId));
                 else echo json_encode(array('code' => 0, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
             }else echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));

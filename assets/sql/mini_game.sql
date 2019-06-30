@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2019 at 04:26 PM
+-- Generation Time: Jun 30, 2019 at 07:19 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mini_game`
+-- Database: `lodaty`
 --
 
 -- --------------------------------------------------------
@@ -62,11 +62,11 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`CardId`, `CardNameId`, `CardTypeId`, `CardSeri`, `CardNumber`, `CardActiveId`, `StatusId`) VALUES
-(1, 2, 1, '089898898', '089898899', 4, 2),
+(1, 2, 1, '089898898', '089898899', 2, 2),
 (2, 2, 3, '99999999999999', '9999999999', 2, 2),
 (3, 2, 5, '1111111111', '1111111111111', 2, 2),
-(4, 2, 4, '22222222222', '2222222222', 4, 2),
-(5, 1, 3, '333333333', '3333333333333', 3, 2);
+(4, 2, 4, '22222222222', '2222222222', 2, 2),
+(5, 1, 3, '333333333', '3333333333333', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -88,15 +88,7 @@ CREATE TABLE `customersanticipates` (
 --
 
 INSERT INTO `customersanticipates` (`CustomersAnticipateId`, `LotteryStationId`, `Number`, `CrDateTime`, `UserId`, `StatusId`) VALUES
-(12, 17, '45', '2019-06-19 00:00:00', 2, 2),
-(13, 17, '89', '2019-06-20 00:00:00', 3, 2),
-(14, 17, '33', '2019-06-19 00:00:00', 3, 2),
-(15, 17, '21', '2019-06-19 00:00:00', 4, 2),
-(16, 17, '66', '2019-06-19 00:00:00', 5, 2),
-(17, 17, '01', '2019-06-18 00:00:00', 6, 2),
-(18, 17, '02', '2019-06-19 00:00:00', 6, 2),
-(19, 17, '02', '2019-06-21 00:00:00', 3, 2),
-(22, 17, '56', '2019-06-24 00:00:00', 3, 2);
+(1, 17, '22', '2019-06-30 00:00:00', 5, 2);
 
 -- --------------------------------------------------------
 
@@ -135,34 +127,13 @@ CREATE TABLE `logins` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lotteryresultdetails`
---
-
-CREATE TABLE `lotteryresultdetails` (
-  `LotteryResultDetailId` int(11) NOT NULL,
-  `LotteryResultId` int(10) NOT NULL,
-  `Raffle` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `lotteryresultdetails`
---
-
-INSERT INTO `lotteryresultdetails` (`LotteryResultDetailId`, `LotteryResultId`, `Raffle`) VALUES
-(15, 3, '33'),
-(16, 3, '45'),
-(17, 3, '01'),
-(18, 4, '02');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `lotteryresults`
 --
 
 CREATE TABLE `lotteryresults` (
   `LotteryResultId` int(11) NOT NULL,
   `LotteryStationId` int(10) NOT NULL,
+  `Raffle` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `CrDateTime` datetime NOT NULL,
   `StatusId` tinyint(2) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -171,10 +142,8 @@ CREATE TABLE `lotteryresults` (
 -- Dumping data for table `lotteryresults`
 --
 
-INSERT INTO `lotteryresults` (`LotteryResultId`, `LotteryStationId`, `CrDateTime`, `StatusId`) VALUES
-(3, 17, '2019-06-19 00:00:00', 2),
-(4, 17, '2019-06-21 00:00:00', 2),
-(5, 17, '2019-06-18 00:00:00', 2);
+INSERT INTO `lotteryresults` (`LotteryResultId`, `LotteryStationId`, `Raffle`, `CrDateTime`, `StatusId`) VALUES
+(1, 17, '22', '2019-06-30 00:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -254,7 +223,9 @@ CREATE TABLE `playerwins` (
 INSERT INTO `playerwins` (`PlayerWinId`, `CustomersAnticipateId`, `CardId`, `UserUpdateDate`) VALUES
 (1, 12, 5, '0000-00-00 00:00:00'),
 (2, 14, 1, '0000-00-00 00:00:00'),
-(3, 19, 4, '0000-00-00 00:00:00');
+(3, 19, 4, '0000-00-00 00:00:00'),
+(5, 16, 2, '0000-00-00 00:00:00'),
+(6, 1, 5, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -273,10 +244,12 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`QuestionId`, `QuestionName`, `StatusId`) VALUES
-(1, 'Bạn là nam đúng không ?', 2),
+(1, 'Your name', 2),
 (2, 'Bạn là bede đúng không ?', 2),
 (3, 'có yeu hoa hồng không', 0),
-(4, 'dd', 0);
+(4, 'dd', 0),
+(5, 'your primary school', 2),
+(6, 'aaa', 0);
 
 -- --------------------------------------------------------
 
@@ -311,10 +284,13 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`UserId`, `UserName`, `UserPass`, `FullName`, `Email`, `GenderId`, `StatusId`, `RoleId`, `PhoneNumber`, `Avatar`, `Token`, `QuestionId`, `AnswerId`, `CrUserId`, `CrDateTime`, `UpdateUserId`, `UpdateDateTime`) VALUES
 (1, 'admin', '25f9e794323b453885f5181f1b624d0b', 'Hà Minh Mẫn', 'haminhman2011@gmail.com', 1, 2, 1, '01669136318', 'logowt.png', 'e5ca59ae5994fc', 0, 0, 1, '2017-07-23 21:24:59', 3, '2018-07-22 19:34:27'),
 (2, 'KH02', '25f9e794323b453885f5181f1b624d0b', 'Hà Minh Mẫn', 'haminhman2012@gmail.com', 1, 2, 2, '0385524224', 'logowt.png', 'e5ca59ae5994fc', 0, 0, 1, '2017-07-23 21:24:59', 1, '2019-06-03 22:23:47'),
-(3, 'KH03', 'd41d8cd98f00b204e9800998ecf8427e', 'ha minh man', 'a@gmail.com', 0, 2, 2, '0489989998', NULL, NULL, 1, 2, 0, '2019-06-04 21:07:28', NULL, NULL),
+(3, 'KH03', 'd41d8cd98f00b204e9800998ecf8427e', 'ha minh man', 'a@gmail.com', 0, 2, 2, '0489989998', NULL, NULL, 1, 2, 0, '2019-06-04 21:07:28', 1, '2019-06-28 00:47:39'),
 (4, 'KH04', 'e10adc3949ba59abbe56e057f20f883e', 'haminhman', 'agbg@gmail.com', 0, 2, 2, '0286676768', NULL, NULL, 1, 1, 0, '2019-06-04 21:15:17', NULL, NULL),
 (5, 'KH05', 'e10adc3949ba59abbe56e057f20f883e', '0369136318', 'hn@gmail.com', 0, 2, 2, '0369136310', NULL, NULL, 1, 1, 0, '2019-06-04 21:17:55', 1, '2019-06-05 20:18:31'),
-(6, 'KH06', '25f9e794323b453885f5181f1b624d0b', 'nguyen van a', 'man001', 0, 2, 2, '038998998', NULL, NULL, 0, 0, 1, '2019-06-17 20:00:32', NULL, NULL);
+(6, 'KH06', '25f9e794323b453885f5181f1b624d0b', 'nguyen van a', 'man001', 0, 2, 2, '038998998', NULL, NULL, 0, 0, 1, '2019-06-17 20:00:32', NULL, NULL),
+(7, 'KH07', '3858cf5dd62eba61a92761c7a95bcfdb', 'Hai Truong', 'yunhaihuang+06272314@gmail.com', 0, 2, 2, '0909682328', NULL, NULL, 0, 0, 0, '2019-06-27 23:15:01', NULL, NULL),
+(8, 'KH08', 'f584ce046d4271c1afbb6a3ad5ba8166', 'Ngo Hong Dao', 'yunhaihuang+06272316@gmail.com', 0, 2, 2, '909682329', NULL, NULL, 0, 0, 0, '2019-06-27 23:16:31', 1, '2019-06-28 00:47:11'),
+(9, 'KH09', 'fcea920f7412b5da7be0cf42b8c93759', 'nguyen van a', 'my@gmail.com', 0, 2, 2, '0932758870', NULL, NULL, 2, 2, 0, '2019-06-30 11:30:52', 9, '2019-06-30 12:07:27');
 
 --
 -- Indexes for dumped tables
@@ -349,12 +325,6 @@ ALTER TABLE `filters`
 --
 ALTER TABLE `logins`
   ADD PRIMARY KEY (`LoginId`) USING BTREE;
-
---
--- Indexes for table `lotteryresultdetails`
---
-ALTER TABLE `lotteryresultdetails`
-  ADD PRIMARY KEY (`LotteryResultDetailId`);
 
 --
 -- Indexes for table `lotteryresults`
@@ -406,7 +376,7 @@ ALTER TABLE `cards`
 -- AUTO_INCREMENT for table `customersanticipates`
 --
 ALTER TABLE `customersanticipates`
-  MODIFY `CustomersAnticipateId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `CustomersAnticipateId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `filters`
@@ -421,16 +391,10 @@ ALTER TABLE `logins`
   MODIFY `LoginId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `lotteryresultdetails`
---
-ALTER TABLE `lotteryresultdetails`
-  MODIFY `LotteryResultDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `lotteryresults`
 --
 ALTER TABLE `lotteryresults`
-  MODIFY `LotteryResultId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `LotteryResultId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lotterystations`
@@ -442,19 +406,19 @@ ALTER TABLE `lotterystations`
 -- AUTO_INCREMENT for table `playerwins`
 --
 ALTER TABLE `playerwins`
-  MODIFY `PlayerWinId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PlayerWinId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

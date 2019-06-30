@@ -20,11 +20,12 @@ class Site extends MY_Controller {
     public function index(){
     	$user = $this->session->userdata('user');
     	$num = 0;
+    	$this->load->model(array('Mcustomersanticipates','Mquestions'));
     	if($user){
-    		$this->load->model('Mcustomersanticipates');
     		$num = $this->Mcustomersanticipates->getNum($user['UserId']);
     	}
-        $this->load->view('site/home', array('user' =>$user, 'num' => $num));
+    	$listQuestions = $this->Mquestions->getBy(array('StatusId' => STATUS_ACTIVED));
+        $this->load->view('site/home', array('user' =>$user, 'num' => $num, 'listQuestions' => $listQuestions));
 	}
 
 	public function logout(){
@@ -97,6 +98,12 @@ class Site extends MY_Controller {
 				}else echo json_encode(array('code' => 0, 'message' => 'Có lỗi xảy ra, vui lòng thử lại'));
 			}
 		}else $this->load->view('user/permission');
+	}
+
+	public function forGotPass(){
+		$this->load->model(array('Mquestions'));
+    	$listQuestions = $this->Mquestions->getBy(array('StatusId' => STATUS_ACTIVED));
+    	$this->load->view('user/forgotpass', array("listQuestions" => $listQuestions));
 	}
 
 }

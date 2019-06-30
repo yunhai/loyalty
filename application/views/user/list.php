@@ -4,8 +4,7 @@
             <section class="content-header no-pd-lr">
                 <h1 class="ttl-list-order ft-seogeo"><?php echo $title; ?></h1>
                 <ul class="list-inline new-stl">
-                    <li><a  href="<?php echo base_url('user/exportUser'); ?>" class="btn btn-default">Xuất dữ liệu</a></li>
-                    <li><a href="<?php echo base_url('user/add'); ?>"  class="btn btn-primary">Thêm Khách Hàng</a></li>
+                    <li><a  href="<?php echo base_url('user/exportUser'); ?>" class="btn btn-primary">Xuất dữ liệu</a></li>
                 </ul>
             </section>
             <section class="content upn ft-seogeo">
