@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAGC,iBAAK;EACJ,MAAM,EAAE,iBAAiB;EACzB,kBAAkB,EAAE,mCAAmC;EACzD,eAAe,EAAK,mCAAmC;EACvD,UAAU,EAAU,mCAAmC",
-"sources": ["transport.scss"],
-"names": [],
-"file": "transport.css"
-}
