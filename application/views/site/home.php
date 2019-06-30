@@ -56,11 +56,11 @@
                         <?php echo form_open('api/user/checkLogin', array('id' => 'userForm')); ?>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" class="form-control hmdrequired" name="UserName" value="" placeholder="Nhập email hoặc số điện thoại" data-field="Nhập email hoặc số điện thoại">
+                                <input type="text" class="form-control hmdrequired" name="UserName" value="" placeholder="Nhập emai" data-field="Email">
                             </div>
                             <div class="form-group">
                                 <label>Mật khẩu</label>
-                                <input type="password" name="UserPass" id="password" class="form-control hmdrequired" value="" placeholder="Nhập password" data-field="Password">
+                                <input type="password" name="UserPass" id="password" class="form-control hmdrequired" value="" placeholder="Nhập password" data-field="Mật khẩu">
                             </div>
                             <div class="col-md-6 col-xs-6 text-left">
                                 <label class="container">Nhớ tôi
@@ -82,38 +82,37 @@
                     <div class="tab-pane" id="register">
                         <?php echo form_open('api/user/saveUser', array('id' => 'userRegisterForm')); ?>
                             <div class="col-md-6">
+                              <div class="form-group">
+                                  <label>Điện thoại</label>
+                                  <div class="phone-input-group">
+                                      <input type="text" class="form-control hmdrequired" data-field="Số điện thoại" placeholder="Số điện thoại di động" id="phoneNumber">
+                                  </div>
+                              </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control hmdrequired" data-field="Nhập email" placeholder="Nhập email" id="email">
+                                    <input type="email" class="form-control hmdrequired" data-field="Nhập email" placeholder="Email" id="email">
                                 </div>
                                 <div class="form-group">
                                     <label>Mật khẩu</label>
-                                    <input type="password" id="userPass"  class="form-control hmdrequired" data-field="Nhập mật khẩu" placeholder="Nhập mật khẩu">
+                                    <input type="password" id="userPass"  class="form-control hmdrequired" data-field="Mật khẩu" placeholder="Nhập mật khẩu">
                                 </div>
                                 <div class="form-group">
                                     <label>Nhập lại mật khẩu</label>
-                                    <input type="password" id="rePass"  class="form-control hmdrequired" data-field="Nhập lại  mật khẩu" placeholder="Nhập lại mật khẩu">
-                                </div>
-                                <div class="form-group">
-                                    <label>Câu trả lời</label>
-                                    <?php $this->Mconstants->selectConstants('answer', 'AnswerId', 0, true, '--Chọn câu trả lời--'); ?>
+                                    <input type="password" id="rePass"  class="form-control hmdrequired" data-field="Mật khẩu xác thực" placeholder="Nhập lại mật khẩu">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Họ tên</label>
-                                    <input type="text"   class="form-control hmdrequired"data-field="Họ và tên" placeholder="Họ và tên" id="fullName">
-                                </div>
-                                <div class="form-group">
-                                    <label>Điện thoại</label>
-                                    <div class="phone-input-group">
-                                        <label>+84 </label> 
-                                        <input type="text" class="form-control phone-input hmdrequired" data-field="Số điện thoại di động" placeholder="Số điện thoại di động" id="phoneNumber">
-                                    </div>
+                                    <input type="text" class="form-control hmdrequired"data-field="Họ và tên" placeholder="Họ và tên" id="fullName">
                                 </div>
                                 <div class="form-group">
                                     <label>Câu hỏi bảo mật</label>
                                     <?php $this->Mconstants->selectObject($listQuestions, 'QuestionId', 'QuestionName', 'QuestionId', 0, true, '--Câu hỏi bảo mật--', ''); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label>Câu trả lời</label>
+                                    <?php $this->Mconstants->selectConstants('answer', 'AnswerId', 0, true, '--Chọn câu trả lời--'); ?>
                                 </div>
                                 <div class="clearfix"></div>
                                 <button type="button" class="btn btn-primary" id="btnRegister">ĐĂNG KÝ</button>
