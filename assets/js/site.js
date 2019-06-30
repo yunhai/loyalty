@@ -10,7 +10,6 @@ app.init = function () {
     app.receiveCard();
 };
 
-
 app.initLibrary = function(){
     $('body').on('keydown', 'input.cost', function (e) {
         if(checkKeyCodeNumber(e)) e.preventDefault();
@@ -20,7 +19,7 @@ app.initLibrary = function(){
         else{
         	showNotification('Mỗi ô chỉ được nhập 1 số duy nhất', 0);
          	$(this).val('')
-        } 
+        }
     }).on("change", "#isRemember", function(){
         if ($(this).is(':checked')){
             $(this).val("on")
@@ -34,8 +33,6 @@ app.initLibrary = function(){
     function checkKeyCodeNumber(e){
 	    return !((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode == 8 ||  e.keyCode == 35 || e.keyCode == 36 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46);
 	}
-
-	
 };
 
 app.submit = function(){
@@ -115,8 +112,6 @@ app.receiveCard = function(){
                         if(confirm('Vui lòng nhận card: mã:'+data.CardNumber)){
 
                         }
-
-
                     }
                 },
                 error: function (response) {
@@ -143,13 +138,15 @@ app.register = function(){
                 url: form.attr('action'),
                 data: {
                     UserId:     0,
-                    UserName: $('input#fullName').val().trim(),
+                    UserName:   $('input#fullName').val().trim(),
                     UserPass:   $('input#userPass').val(),
                     FullName:   $('input#fullName').val().trim(),
                     Email:      $('input#email').val(),
                     GenderId:   1,
                     StatusId:   2,
                     PhoneNumber: $('input#phoneNumber').val(),
+                    SecurityQuestion: $('select#security-question').val(),
+                    SecurityAnwser: $('input#security-anwser').val(),
                 },
                 success: function (response) {
                     var json = $.parseJSON(response);
@@ -187,7 +184,7 @@ app.userWin = function(){
                     html += '<td class="text-center">'+data[item].CardType+'</td>'
                     html += '</tr>';
                     num += data[item].TotalPrice;
-                    
+
                 }
                 $(".bg-money").html(formatNumber(num));
                 $("#tbody-bac").html(html);
@@ -206,7 +203,6 @@ $(document).ready(function(){
 	app.init();
 });
 
-//validate
 function validateEmpty(container) {
     var flag = true;
     $(container + ' .hmdrequired').each(function () {
