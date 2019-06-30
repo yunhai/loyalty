@@ -84,6 +84,10 @@
                     <?php echo form_open('api/user/saveUser', array('id' => 'userRegisterForm')); ?>
                         <div class="col-md-6">
                             <div class="form-group">
+                              <label>Điện thoại</label>
+                              <input type="text" class="form-control hmdrequired" data-field="Số điện thoại di động" placeholder="Số điện thoại di động" id="phoneNumber">
+                            </div>
+                            <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control hmdrequired" data-field="Nhập email" placeholder="Nhập email" id="email">
                             </div>
@@ -91,6 +95,16 @@
                                 <label>Mật khẩu</label>
                                 <input type="password" id="userPass" class="form-control hmdrequired" data-field="Nhập mật khẩu" placeholder="Nhập mật khẩu">
                             </div>
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu</label>
+                                <input type="password" id="rePass"  class="form-control hmdrequired" data-field="Nhập lại mật khẩu" placeholder="Nhập lại mật khẩu">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Họ tên</label>
+                              <input type="text" class="form-control hmdrequired" data-field="Họ và tên" placeholder="Họ và tên" id="fullName">
+                          </div>
                             <div class="form-group">
                                 <label>Câu hỏi bảo mật</label>
                                 <select class="form-control hmdrequired" data-field="Câu hỏi bảo mật" placeholder="Câu hỏi bảo mật" id="security-question">
@@ -100,20 +114,6 @@
                                   <option value='3'>câu hỏi 3</option>
                                   <option value='4'>câu hỏi 4</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Họ tên</label>
-                                <input type="text" class="form-control hmdrequired" data-field="Họ và tên" placeholder="Họ và tên" id="fullName">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Điện thoại</label>
-                              <input type="text" class="form-control hmdrequired" data-field="Số điện thoại di động" placeholder="Số điện thoại di động" id="phoneNumber">
-                            </div>
-                            <div class="form-group">
-                                <label>Nhập lại mật khẩu</label>
-                                <input type="password" id="rePass"  class="form-control hmdrequired" data-field="Nhập lại mật khẩu" placeholder="Nhập lại mật khẩu">
                             </div>
                             <div class="form-group">
                                 <label>Đáp án câu hỏi bảo mật</label>
