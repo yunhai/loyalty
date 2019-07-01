@@ -45,10 +45,12 @@
             <div>
                 <h2 class="menu_title">Tài khoản</h2>
                 <ul class="list_load">
+                    <?php if($user): ?>
                     <li class="list_item reward-notification">
                         <p>Bạn được nhận thưởng</p>
                         <span class="bg-money">0</span>
                     </li>
+                    <?php endif; ?>
                     <li class="list_item"><a href="<?php echo base_url('site/logout'); ?>" class="dropdown-item"><span class="fa-power-off-white"></span>Thoát tài khoản</a></li>
                 </ul>
             </div>
