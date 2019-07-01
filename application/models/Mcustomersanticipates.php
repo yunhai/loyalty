@@ -125,9 +125,9 @@ class Mcustomersanticipates extends MY_Model {
         ];
         if(!empty($searchText)){
             $dateNow = ddMMyyyyToDate($searchText, 'd/m/Y', 'Y-m-d');
-            $wheres = array("customersanticipates.CrDateTime = '".$dateNow."' AND lotteryresults.Raffle = customersanticipates.Number AND lotteryresults.CrDateTime = '".$dateNow."' AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2");
+            $wheres = array("customersanticipates.CrDateTime = '".$dateNow."' AND lotteryresults.Raffle = customersanticipates.Number AND lotteryresults.CrDateTime = '".$dateNow."' AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2 AND lotteryresults.CrDateTime = customersanticipates.CrDateTime");
         }else{
-            $wheres = array("lotteryresults.Raffle = customersanticipates.Number AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2");
+            $wheres = array("lotteryresults.Raffle = customersanticipates.Number AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2 AND lotteryresults.CrDateTime = customersanticipates.CrDateTime");
         }
         
         $dataBind = [];

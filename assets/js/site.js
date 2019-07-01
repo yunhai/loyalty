@@ -81,6 +81,9 @@ app.login = function(){
                     showNotification(json.message, json.code);
                     if(json.code == 1){
                         setInterval(function(){ location.reload(); }, 3000);
+                        form.find('input, button').prop("disabled", true);
+                    }else{
+                        form.find('input, button').prop("disabled", fase);
                     }
                     
                 },
