@@ -10,45 +10,40 @@ class Musers extends MY_Model {
     }
 
     public function login($userName, $userPass){
-        if(!empty($userName) && !empty($userPass)){
-            $query = "SELECT * FROM users WHERE UserPass=? AND StatusId=? AND (UserName=? OR PhoneNumber=? OR Email =?) LIMIT 1";
-            $users = $this->getByQuery($query, array(md5($userPass), STATUS_ACTIVED, $userName, $userName, $userName));
+        if(!empty($userName) && !empty($userPass)) {
+            $query = "SELECT * FROM users WHERE StatusId=? AND (UserName=? OR PhoneNumber=? OR Email =?) LIMIT 1";
+            $users = $this->getByQuery($query, array(STATUS_ACTIVED, $userName, $userName, $userName));
             if(!empty($users)){
                 $user = $users[0];
-                /*$this->load->model('Mlogins');
-                $this->Mlogins->save(array('UserId' => $user['UserId'], 'IpAddress' => $this->input->ip_address(), 'UserAgent' => $this->input->user_agent(), 'LoginDateTime' => getCurentDateTime()));*/
-                return $user;
+                if (md5($userPass) == $user['UserPass']) {
+                    return $user;
+                }
             }
         }
         return false;
     }
 
     public function checkExist($userId, $email, $phoneNumber){
-        $query = "SELECT UserId FROM users WHERE UserId!=? AND StatusId=?";
-        if(!empty($email) && !empty($phoneNumber)){
-            $query .= " AND (Email=? OR PhoneNumber=?) LIMIT 1";
-            $users = $this->getByQuery($query, array($userId, STATUS_ACTIVED, $email, $phoneNumber));
-        }
-        elseif(!empty($email)){
-            $query .= " AND Email=? LIMIT 1";
-            $users = $this->getByQuery($query, array($userId, STATUS_ACTIVED, $email));
-        }
-        elseif(!empty($phoneNumber)){
-            $query .= " AND PhoneNumber=? LIMIT 1";
-            $users = $this->getByQuery($query, array($userId, STATUS_ACTIVED, $phoneNumber));
-        }
-        if (!empty($users)) return true;
-        return false;
+        $query = "SELECT UserId FROM users WHERE UserId <> ? AND (Email = ? OR PhoneNumber = ?) LIMIT 1";
+        
+        $users = $this->getByQuery($query, array($userId, $email, $phoneNumber));
+        return !empty($users);
     }
 
     public function checkExistForGot($data){
-        $query = "SELECT UserId FROM users WHERE StatusId= 2 AND FullName = ? AND Email = ? AND PhoneNumber = ? AND AnswerId = ? AND QuestionId = ?";
-        $users = $this->getByQuery($query, array($data['FullName'], $data['Email'], $data['PhoneNumber'], $data['AnswerId'], $data['QuestionId']));
-        if($users) return $users[0]['UserId'];
-        else return 0;
+        $query = "SELECT UserId, QuestionId, AnswerId FROM users WHERE StatusId= 2 AND PhoneNumber = ? LIMIT 1;";
+        $users = $this->getByQuery($query, array($data['PhoneNumber']));
+
+        if ($users) {
+          $target = current($users);
+          $id = $target['UserId'];
+
+          $token = trim(strtolower($target['QuestionId'] . $target['AnswerId']));
+          $tokenVerify = trim(strtolower($data['SecurityQuestion'] . $data['SecurityAnswer']));
+          return ($token === $tokenVerify) ? $id : 0;
+        }
+        return 0;
     }
-
-
 
     public function checkStaffExist($staffId, $phoneNumber, $ceoId){ // roleId = 3
         $users = $this->getByQuery("SELECT UserId FROM users WHERE UserId != ? AND StatusId = ? AND RoleId = ? AND PhoneNumber = ? AND CrUserId = ?", array($staffId, STATUS_ACTIVED, 3, $phoneNumber, $ceoId));
@@ -103,24 +98,17 @@ class Musers extends MY_Model {
         return $retVal;
     }
 
-   
-
-    public function update($postData, $userId = 0, $isAdminUpdate = false){
-        $isUpdate = $userId > 0;
+    public function update($postData, $userId = 0){
         $this->db->trans_begin();
         $userId = $this->save($postData, $userId);
-        if($userId > 0){
-            $userName = 'KH'.($userId > 9 ? $userId : '0'.$userId);
-            $this->db->update('users', array('UserName' => $userName), array('UserId' => $userId));
-        }
-        if ($this->db->trans_status() === false) {
-            $this->db->trans_rollback();
-            return 0;
-        }
-        else {
+
+        if ($this->db->trans_status()) {
             $this->db->trans_commit();
             return $userId;
         }
+
+        $this->db->trans_rollback();
+        return 0;
     }
 
     public function getByIds($userIds){
@@ -138,7 +126,7 @@ class Musers extends MY_Model {
         ];
         $wheres = array('StatusId = 2 AND UserId != '.$userId);
         $dataBind = [];
-       
+
         $whereSearch= '';
         $searchText = strtolower($searchText);
         //search theo text
@@ -172,7 +160,7 @@ class Musers extends MY_Model {
             $dayDiff = getDayDiff($dataUsers[$i]['CrDateTime'], $now);
             $dataUsers[$i]['CrDateTime'] = ddMMyyyy($dataUsers[$i]['CrDateTime'], $dayDiff > 2 ? 'd/m/Y H:i' : 'H:i');
             $dataUsers[$i]['DayDiff'] = $dayDiff;
-            $dataUsers[$i]['labelCss'] = $this->Mconstants->labelCss; 
+            $dataUsers[$i]['labelCss'] = $this->Mconstants->labelCss;
         }
         $data = array();
         $totalRows = $this->getByQuery($queryCount, $dataBind);

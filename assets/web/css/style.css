@@ -1000,7 +1000,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     padding-left: 40px;
 }
 
-.form-guess #login form {
+.form-guess .login-form form {
     margin: 0 auto;
     padding: 60px 245px 40px 245px;
 }
@@ -1115,7 +1115,7 @@ ul.callbacks_tabs.callbacks2_tabs {
 .form-guess .nav-tabs>li.active,
 .form-guess .nav-tabs>li.active {
     background: #590006;
-    z-index: 8888;
+    z-index: 2;8888;
 }
 
 .form-guess .nav-tabs>li.active>a,
@@ -1428,7 +1428,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     .form-guess .nav-tabs>li>a {
         font-size: 15px;
     }
-    .form-guess #login form {
+    .form-guess .login-form form {
         padding: 60px 15px 40px 15px;
     }
     .rewarded .table>thead>tr>td,
@@ -1456,7 +1456,7 @@ ul.callbacks_tabs.callbacks2_tabs {
         height: 45px;
         font-size: 16px;
     }
-    .form-guess #register .col-md-6 {
+    .form-guess .register-form .col-md-6 {
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -1508,4 +1508,8 @@ ul.callbacks_tabs.callbacks2_tabs {
     .footer {
         padding: 12px 0 12px 0;
     }
+}
+
+.popup {
+    color: #333;
 }

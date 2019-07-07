@@ -8,7 +8,7 @@
         <label><i class="ion-person"></i></label>
     </div>
     <div class="input-field">
-        <input type="password" class="material hmdrequired" name="UserPass" autocomplete="new-password" value="<?php echo $userPass; ?>" placeholder="Nhập password" data-field="Password"><span class="bottom"></span>
+        <input type="password" class="material hmdrequired" name="UserPass" autocomplete="new-password" value="" placeholder="Nhập password" data-field="Password"><span class="bottom"></span>
         <label><i class="ion-locked"></i></label>
     </div>
     <button type="submit" class="btn btn-gr btn-block btn-flat">Đăng nhập</button>

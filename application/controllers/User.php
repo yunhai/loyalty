@@ -25,7 +25,6 @@ class User extends MY_Controller {
 		$this->load->view('user/permission');
 	}
 
-
 	public function staff(){
 		$user = $this->checkUserLogin();
 		if($user['RoleId'] == 1){
@@ -121,7 +120,6 @@ class User extends MY_Controller {
     	if($user['RoleId'] == 1){
     		$listUsers = $this->Musers->getBy(array("StatusId" => STATUS_ACTIVED, "StatusId" => STATUS_ACTIVED));
     		if(!empty($listUsers)) {
-    			
     			$fileUrl = FCPATH . 'assets/uploads/excels/users.xls';
     			$this->load->library('excel');
     			$objReader = PHPExcel_IOFactory::createReader('Excel5');
@@ -129,7 +127,6 @@ class User extends MY_Controller {
                 $objPHPExcel->setActiveSheetIndex(0);
 
                 $sheet = $objPHPExcel->getActiveSheet();
-              
                 $i = 2;
                 foreach($listUsers as $u) {
                 	$crDateTimec= ddMMyyyy($u['CrDateTime'], 'd/m/Y H:i');
@@ -149,7 +146,7 @@ class User extends MY_Controller {
                 $objWriter->save('php://output');
                 $objPHPExcel->disconnectWorksheets();
                 unset($objPHPExcel);
-    		}else echo "<script>window.close();</script>";
-    	}else redirect(base_url());
+    		} else echo "<script>window.close();</script>";
+    	} else redirect(base_url());
     }
 }

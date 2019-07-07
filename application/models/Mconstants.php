@@ -7,7 +7,6 @@ class Mconstants extends CI_Model {
         parent::__construct();
     }
 
-   
     public $answer = array(
         1 => 'YES',
         2 => 'NO',
@@ -70,14 +69,11 @@ class Mconstants extends CI_Model {
         }
     }
 
-    public function selectObject($listObj, $objKey, $objValue, $selectName, $objId = 0, $isAll = false, $txtAll = "Tất cả", $selectClass = '', $attrSelect = ''){
+    public function selectObject($listObj, $objKey, $objValue, $selectName, $objId = 0, $isAll = false, $txtAll = "Tất cả", $selectClass = '', $attrSelect = '') {
         $id = str_replace('[]', '', lcfirst($selectName));
         echo '<select class="form-control'.$selectClass.'" name="'.$selectName.'" id="'.$id.'"'.$attrSelect.'>';
         if($isAll) echo '<option value="0">'.$txtAll.'</option>';
-        /*if($isAll){
-            if(empty($txtAll)) echo '<option value="0">Tất cả</option>';
-            else echo '<option value="0">'.$txtAll.'</option>';
-        }*/
+
         $isSelectMutiple = is_array($objId);
         foreach($listObj as $obj){
             $selected = '';
@@ -125,7 +121,7 @@ class Mconstants extends CI_Model {
             elseif ($itemTypeId == 5) $retVal = base_url('article/' . $itemSlug);
 
         }
-        
+
         return $retVal;
     }
 }

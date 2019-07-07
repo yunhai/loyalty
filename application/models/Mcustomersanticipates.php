@@ -9,15 +9,8 @@ class Mcustomersanticipates extends MY_Model {
         $this->_primary_key = "CustomersAnticipateId";
     }
 
-    public function checkExist_1($userId, $date){
-        $query = "SELECT UserId FROM customersanticipates WHERE UserId=? AND StatusId=? AND  CrDateTime = ?";
-       	$datas = $this->getByQuery($query, array($userId, STATUS_ACTIVED, $date));
-        if (!empty($datas)) return true;
-        return false;
-    }
-
-    public function checkExist_2($userId, $date){
-        $query = "SELECT UserId FROM customersanticipates WHERE UserId=? AND StatusId=? AND  CrDateTime = ? ";
+    public function checkExist($userId, $date){
+        $query = "SELECT UserId FROM customersanticipates WHERE UserId=? AND StatusId=? AND CrDateTime=?";
        	$datas = $this->getByQuery($query, array($userId, STATUS_ACTIVED, $date));
         if (!empty($datas)) return true;
         return false;
@@ -37,7 +30,7 @@ class Mcustomersanticipates extends MY_Model {
         ];
         $wheres = array('customersanticipates.StatusId = 2');
         $dataBind = [];
-       
+
         $whereSearch= '';
         $searchText = strtolower($searchText);
         //search theo text
@@ -49,7 +42,6 @@ class Mcustomersanticipates extends MY_Model {
                 $whereSearch = 'customersanticipates.Number like ?';
                 for( $i = 0; $i < 1; $i++) $dataBind[] = "%$searchText%";
             }
-            
         }
         if(!empty($whereSearch)) {
             $whereSearch = "( $whereSearch )";
@@ -91,11 +83,7 @@ class Mcustomersanticipates extends MY_Model {
         return $data;
     }
 
-
     public function searchByFilterWin($searchText, $itemFilters, $limit, $page, $userId = 0){
-       
-        //search theo text
-        // $dateNow = getDateNow();
         $dateNow = '';
 
         $queryCount = "select customersanticipates.CustomersAnticipateId AS totalRow from customersanticipates {joins} where {wheres}";
@@ -114,14 +102,13 @@ class Mcustomersanticipates extends MY_Model {
             'cards.CardTypeId',
             'COALESCE(cards.CardActiveId, 0) AS CardActiveId'
         ];
-      
+
         $joins = [
             'playerwins' => "LEFT JOIN playerwins ON playerwins.CustomersAnticipateId = customersanticipates.CustomersAnticipateId",
             'cards' => "LEFT JOIN cards ON cards.CardId = playerwins.CardId AND cards.CardId",
             'users' => "LEFT JOIN users ON customersanticipates.UserId = users.UserId",
             'lotterystations' => "LEFT JOIN lotterystations ON lotterystations.LotteryStationId = customersanticipates.LotteryStationId",
             'lotteryresults' => "LEFT JOIN lotteryresults ON lotteryresults.LotteryStationId = lotterystations.LotteryStationId",
-            
         ];
         if(!empty($searchText)){
             $dateNow = ddMMyyyyToDate($searchText, 'd/m/Y', 'Y-m-d');
@@ -129,12 +116,12 @@ class Mcustomersanticipates extends MY_Model {
         }else{
             $wheres = array("lotteryresults.Raffle = customersanticipates.Number AND lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND users.StatusId = 2 AND lotteryresults.CrDateTime = customersanticipates.CrDateTime");
         }
-        
+
         $dataBind = [];
-       
+
         $whereSearch= '';
         $searchText = strtolower($searchText);
-        
+
         if(!empty($whereSearch)) {
             $whereSearch = "( $whereSearch )";
             $wheres[] = $whereSearch;
@@ -168,14 +155,12 @@ class Mcustomersanticipates extends MY_Model {
                 $datas[$i]['InfoCard'] .= '<p>- Number:'.$datas[$i]['CardNumber'].'</p>';
 
                 $datas[$i]['UserCardUse'] = $this->Mconstants->cardActive[$datas[$i]['CardActiveId']];
-                
             }
             $datas[$i]['AddCard'] = '';
             if($datas[$i]['CardActiveId'] != 3){
                 if( $datas[$i]['CardActiveId'] != 4){
                     $datas[$i]['AddCard'] = '<a href="javascript:void(0)" style="color:#ffffff" class="btn btn-success btn-xs btnShowModal "  data-id="'.$datas[$i]['CustomersAnticipateId'].'">Add Card</a>';
                 }
-                
             }
         }
         $data = array();
@@ -197,37 +182,20 @@ class Mcustomersanticipates extends MY_Model {
     public function getListHomeWin($user){
         $where = '';
         $flag = false;
-        if($user){
+        if ($user) {
             $where =  ' AND customersanticipates.UserId = '.$user['UserId'];
             $flag = true;
         }
-        $query = "select users.FullName, cards.CardTypeId, cards.CardActiveId, customersanticipates.CustomersAnticipateId 
-                from customersanticipates 
+        $query = "SELECT users.FullName, cards.CardId, cards.CardTypeId, cards.CardNameId, cards.CardActiveId, customersanticipates.CustomersAnticipateId, DATE_FORMAT(customersanticipates.CrDateTime, '%d/%m/%Y') as PlayDate 
+                FROM customersanticipates 
                 LEFT JOIN playerwins ON playerwins.CustomersAnticipateId = customersanticipates.CustomersAnticipateId 
                 INNER JOIN cards ON cards.CardId = playerwins.CardId AND cards.CardId 
                 LEFT JOIN users ON customersanticipates.UserId = users.UserId 
                 LEFT JOIN lotterystations ON lotterystations.LotteryStationId = customersanticipates.LotteryStationId 
                 LEFT JOIN lotteryresults ON lotteryresults.LotteryStationId = lotterystations.LotteryStationId 
-                where  lotteryresults.Raffle = customersanticipates.Number 
+                WHERE  lotteryresults.Raffle = customersanticipates.Number 
                 AND  lotteryresults.StatusId = 2 AND customersanticipates.StatusId = 2 AND users.RoleId = 2 AND cards.CardActiveId IN (3, 4) AND users.StatusId = 2  ".$where." ORDER BY lotteryresults.CrDateTime";
         $datas = $this->getByQuery($query);
-        if($flag){
-            for ($i = 0; $i < count($datas); $i++) {
-                if($datas[$i]['CardActiveId'] == 3){
-                    $datas[$i]['CardType'] = '<a class="receive-card" href="javascript:void(0)" data-id="'.$datas[$i]['CustomersAnticipateId'].'">Thẻ Cào Điện Thoại '.priceFormat($this->Mconstants->typeCard[$datas[$i]['CardTypeId']]).' VNĐ </a>';
-                    $datas[$i]['TotalPrice'] = intval($this->Mconstants->typeCard[$datas[$i]['CardTypeId']]);
-                }else{
-                    $datas[$i]['CardType'] = '<p>Bạn đã nhận thẻ cào điện thoại.</p>';
-                    $datas[$i]['TotalPrice'] = 0;
-                }
-                
-            }
-        }else{
-            for ($i = 0; $i < count($datas); $i++) {
-                $datas[$i]['CardType'] = 'Thẻ Cào Điện Thoại '.priceFormat($this->Mconstants->typeCard[$datas[$i]['CardTypeId']]).' VNĐ';
-            }
-        }
-        
         return $datas;
     }
 
