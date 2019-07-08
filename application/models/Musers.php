@@ -11,8 +11,22 @@ class Musers extends MY_Model {
 
     public function login($userName, $userPass){
         if(!empty($userName) && !empty($userPass)) {
-            $query = "SELECT * FROM users WHERE StatusId=? AND (UserName=? OR PhoneNumber=? OR Email =?) LIMIT 1";
+            $query = "SELECT * FROM users WHERE StatusId=? AND (UserName=? OR PhoneNumber=? OR Email =?) AND RoleId=2 LIMIT 1";
             $users = $this->getByQuery($query, array(STATUS_ACTIVED, $userName, $userName, $userName));
+            if(!empty($users)){
+                $user = $users[0];
+                if (md5($userPass) == $user['UserPass']) {
+                    return $user;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function admin_login($userName, $userPass){
+        if(!empty($userName) && !empty($userPass)) {
+            $query = "SELECT * FROM users WHERE StatusId=? AND UserName=? AND RoleId = 1 LIMIT 1";
+            $users = $this->getByQuery($query, array(STATUS_ACTIVED, $userName));
             if(!empty($users)){
                 $user = $users[0];
                 if (md5($userPass) == $user['UserPass']) {
@@ -25,7 +39,7 @@ class Musers extends MY_Model {
 
     public function checkExist($userId, $email, $phoneNumber){
         $query = "SELECT UserId FROM users WHERE UserId <> ? AND (Email = ? OR PhoneNumber = ?) LIMIT 1";
-        
+
         $users = $this->getByQuery($query, array($userId, $email, $phoneNumber));
         return !empty($users);
     }

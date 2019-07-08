@@ -6,13 +6,9 @@
                 <div class="clearfix"> </div>
             </div>
         </div>
-        <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
-        <input type="hidden" id="urlShare" value="<?php echo base_url('ban-da-chia-se-ket-qua-du-doan-la/') ?>">
         <div id="overpay" class=""></div>
         <div id="fb-root" style="display: none"></div>
-        <script>
-            var global_user = <?php echo json_encode($user ?? []); ?>;
-        </script>
+        <script> var global_user = <?php echo json_encode($user ?? []); ?>;</script>
         <script src="assets/web/js/jquery-1.11.1.min.js"></script>
         <script src="assets/web/js/bootstrap.js"></script>
         <script src="assets/vendor/plugins/pnotify/pnotify.custom.min.js"></script>

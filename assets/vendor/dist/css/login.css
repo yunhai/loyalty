@@ -36,8 +36,7 @@
       width: 100%;
       font-family: sans-serif;
       color:#fff;
-      padding-left: 100px;
-          
+      padding-left: 50px;
     }
     .custom-ip input.material:focus {
       outline: none;

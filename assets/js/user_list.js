@@ -8,8 +8,6 @@ $(document).ready(function(){
         extendFunction: function(itemIds, actionCode){
         }
     });
-
-
 });
 
 function renderContentUsers(data){
@@ -33,7 +31,6 @@ function renderContentUsers(data){
             html +='</td>';
             html += '</tr>';
         }
-
 
         $('#tbody').html(html);
     }

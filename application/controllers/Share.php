@@ -1,16 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
-
 class Share extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
 	}
 
-	public function index($num = 00){
+	public function index(){
 		$this->loadModel(array('Mcustomersanticipates'));
 		$data = array(
             'categoryUrlPage' => base_url('ban-da-chia-se-ket-qua-du-doan-la-{$1}'),

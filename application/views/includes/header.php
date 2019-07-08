@@ -44,21 +44,22 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <?php $avatar = empty($user['Avatar']) ? $logoImage : $user['Avatar']; ?>
-                          <img src="<?php echo USER_PATH.$avatar; ?>" class="user-image" alt="User Image">
-                          <span class="hidden-xs"><?php echo $user['FullName']; ?></span>
+                            <!-- <img src="<?php echo USER_PATH.$avatar; ?>" class="user-image" alt="User Image"> -->
+                            <span class="hidden-xs"><?php echo $user['FullName']; ?></span>
                         </a>
                         <ul class="dropdown-menu">
                           <!-- User image -->
                           <li class="user-header">
-                            <img src="<?php echo USER_PATH.$avatar; ?>" class="img-circle" alt="User Image">
+                            <!-- <img src="<?php echo USER_PATH.$avatar; ?>" class="img-circle" alt="User Image"> -->
                             <p> <?php echo $user['FullName']; ?></p>
                           </li>
                           <!-- Menu Footer-->
                           <li class="user-footer">
                             <div class="pull-left">
+                                <a href="<?php echo base_url('user/edit/'.$user['UserId']); ?>" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                              <a href="<?php echo base_url('user/logout'); ?>" class="btn btn-default btn-flat">Đăng xuất</a>
+                                <a href="<?php echo base_url('user/logout'); ?>" class="btn btn-default btn-flat">Đăng xuất</a>
                             </div>
                           </li>
                         </ul>
@@ -96,7 +97,7 @@
                         <li><a href="<?php echo base_url('card'); ?>"><i class="fa fa-circle-o"></i>Card điện thoại</a></li>                        
                         <li><a href="<?php echo base_url('question'); ?>"><i class="fa fa-circle-o"></i>Câu hỏi đăng ký TK</a></li>
                         <li>
-                            <a href="<?php echo base_url('user/staff'); ?>">
+                            <a href="<?php echo base_url('user/list'); ?>">
                                 <i class="fa fa-circle-o"></i> <span>Danh sách người chơi</span>
                             </a>
                         </li>

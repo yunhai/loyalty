@@ -12,7 +12,7 @@ class User extends MY_Controller {
 			$data['userPass'] = $this->input->cookie('userPass', true);
 			$this->load->view('user/login_new', $data);
 		}
-		else redirect('user/staff');
+		else redirect('user/list');
 	}
 
 	public function logout(){
@@ -21,44 +21,19 @@ class User extends MY_Controller {
 		redirect('user');
 	}
 
-	public function permission(){
-		$this->load->view('user/permission');
-	}
-
-	public function staff(){
+	public function list(){
 		$user = $this->checkUserLogin();
+
 		if($user['RoleId'] == 1){
 	        $data = $this->commonData($user,
-	            'Danh sách khách hàng',
+	            'Danh sách người chơi',
 	            array(
 	                'scriptHeader' => array('css' => array('vendor/plugins/tagsinput/jquery.tagsinput.min.css','vendor/plugins/datepicker/datepicker3.css')),
 	                'scriptFooter' => array('js' => array('vendor/plugins/sortable/jquery-ui.js', 'vendor/plugins/sortable/Sortable.min.js','vendor/plugins/tagsinput/jquery.tagsinput.min.js','vendor/plugins/datepicker/bootstrap-datepicker.js', 'js/search_item.js', 'js/user_list.js'))
 	            )
 	        );
-	        if($this->Mactions->checkAccess($data['listActions'], 'user/staff')) {
-	            $this->load->view('user/list', $data);
-	        }
-	        else $this->load->view('user/permission', $data);
+	        $this->load->view('user/list', $data);
 	    } else redirect(base_url());
-	}
-
-	public function add(){
-		$user = $this->checkUserLogin();
-		if($user['RoleId'] == 1){
-			$data = $this->commonData($user,
-				'Thêm CTV',
-				array(
-					'scriptHeader' => array('css' => 'vendor/plugins/datepicker/datepicker3.css'),
-					'scriptFooter' => array('js' => array('vendor/plugins/datepicker/bootstrap-datepicker.js', 'ckfinder/ckfinder.js', 'js/user_update.js'))
-				)
-			);
-			if ($this->Mactions->checkAccess($data['listActions'], 'user/staff')) {
-				$this->loadModel(array('Mgroups'));
-				$data['listGroups'] = $this->Mgroups->getBy(array('StatusId' => STATUS_ACTIVED));
-				$this->load->view('user/add', $data);
-			}
-			else $this->load->view('user/permission', $data);
-		} else redirect(base_url());
 	}
 
 	public function edit($userId = 0){
@@ -66,7 +41,7 @@ class User extends MY_Controller {
 		if($user['RoleId'] == 1){
 			if($userId > 0) {
 				$data = $this->commonData($user,
-					'Cập nhật khách hàng',
+					'Cập nhật người chơi',
 					array(
 						'scriptHeader' => array('css' => 'vendor/plugins/datepicker/datepicker3.css'),
 						'scriptFooter' => array('js' => array('vendor/plugins/datepicker/bootstrap-datepicker.js', 'ckfinder/ckfinder.js', 'js/user_update.js'))
@@ -74,15 +49,10 @@ class User extends MY_Controller {
 				);
 				$userEdit = $this->Musers->get($userId);
 				if ($userEdit) {
-					if ($this->Mactions->checkAccess($data['listActions'], 'user/staff')) {
-						$this->loadModel(array('Mquestions'));
-						$data['canEdit'] = true;
-						$data['userId'] = $userId;
-						$data['userEdit'] = $userEdit;
-						$data['question'] = $this->Mquestions->getFieldValue(array('QuestionId' => $userEdit['QuestionId']), 'QuestionName', '');
-						$this->load->view('user/edit', $data);
-					}
-					else $this->load->view('user/permission', $data);
+					$data['canEdit'] = true;
+					$data['userId'] = $userId;
+					$data['userEdit'] = $userEdit;
+					$this->load->view('user/edit', $data);
 				}
 				else {
 					$data['userId'] = 0;
@@ -94,8 +64,54 @@ class User extends MY_Controller {
 		} else redirect(base_url());
 	}
 
+	public function update(){
+        $postData = $this->arrayFromPost(
+			[
+				'PhoneNumber', 
+				'Email', 
+				'FullName', 
+				'Password', 
+				'PasswordConfirm',
+				'UserId'
+			]
+		);
+		
+		$password = trim($postData['Password'] ?? '');
+		$passwordConfirm = trim($postData['PasswordConfirm'] ?? '');
+		if (empty($postData['PhoneNumber']) ||
+            empty($postData['Email']) ||
+            empty($postData['FullName'])
+        ) {
+            echo json_encode(array('code' => -1, 'message' => "Vui lòng nhập đầy đủ thông tin"));
+            return;
+        }
+
+        $username = $postData['PhoneNumber'] ?? $postData['Email'] ?? '';
+        $update = array(
+            'FullName' => $postData['FullName'],
+            'PhoneNumber' => $postData['PhoneNumber'],
+            'Email' => $postData['Email'],
+            "UpdateUserId" => 1,
+            "UpdateDateTime" => getCurentDateTime(),
+		);		
+		if ($password) {
+			$update['UserPass'] = md5($this->getPassword($password));
+		}
+		$target = $this->checkUserLogin(true);
+        $userId = $this->Musers->save($update, $postData['UserId'] ?? 0);
+        if ($userId > 0)  {
+			if ($postData['UserId'] == $target['UserId']) {
+				$this->session->set_userdata('user', array_merge($target, $update));
+			}
+			
+            echo json_encode(['code' => 1, 'message' => "Cập nhật profile thành công.", 'data' => $update]);
+            return;
+        }
+        echo json_encode(array('code' => 0, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+    }
+
 	public function searchByFilter(){
-        $user = $this->checkUserLogin(true);
+		$user = $this->checkUserLogin(true);
         $data = array();
         $filterId = $this->input->post('filterId');
         $searchText = $this->input->post('searchText');
@@ -148,5 +164,9 @@ class User extends MY_Controller {
                 unset($objPHPExcel);
     		} else echo "<script>window.close();</script>";
     	} else redirect(base_url());
+	}
+
+    private function getPassword($password = '') {
+        return '@pandog#' . $password;
     }
 }

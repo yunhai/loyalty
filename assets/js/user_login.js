@@ -15,7 +15,7 @@ $(document).ready(function() {
                 url: form.attr('action'),
                 data: data,
                 success: function (response) {
-                    var json = response;// $.parseJSON(response);
+                    var json = response;
                     showNotification(json.message, json.code);
                     if(json.code == 1){
                         var redirectUrl = getURLParameter('redirectUrl');

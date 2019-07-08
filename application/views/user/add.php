@@ -5,7 +5,7 @@
                 <h1><?php echo $title; ?></h1>
                 <ul class="list-inline">
                     <li><button class="btn btn-primary submit">Lưu</button></li>
-                    <li><a href="<?php echo base_url('user/staff'); ?>" class="btn btn-default">Đóng</a></li>
+                    <li><a href="<?php echo base_url('user/list'); ?>" class="btn btn-default">Đóng</a></li>
                 </ul>
             </section>
             <section class="content">
@@ -94,7 +94,7 @@
                         </div>
                         <ul class="list-inline pull-right margin-right-10">
                             <li><input class="btn btn-primary submit" type="submit" name="submit" value="Lưu"></li>
-                            <li><a href="<?php echo base_url('user/staff'); ?>" class="btn btn-default">Đóng</a></li>
+                            <li><a href="<?php echo base_url('user/list'); ?>" class="btn btn-default">Đóng</a></li>
                             <input type="text" name="UserId" id="userId" hidden="hidden" value="0">
                             <input type="text" name="GroupIds" id="groupIds" hidden="hidden" value="">
                             <input type="text" id="userEditUrl" hidden="hidden" value="<?php echo base_url('user/edit'); ?>">

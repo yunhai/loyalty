@@ -214,5 +214,4 @@ class Mcustomersanticipates extends MY_Model {
         if($datas) return $datas[0]['Number'];
         else return 0;
     }
-
 }

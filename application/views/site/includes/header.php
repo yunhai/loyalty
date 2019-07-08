@@ -9,6 +9,19 @@
         <link href="assets/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
         <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900&display=swap&subset=vietnamese" rel="stylesheet">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" />
+        <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="128x128" />
         <base href="<?php echo base_url(); ?>" />
     </head>
     <body>

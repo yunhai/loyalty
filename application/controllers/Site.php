@@ -53,7 +53,7 @@ class Site extends MY_Controller {
         $dateNow = getCurentDateTime();
         $date1 = str_replace('-', '/', $dateNow);
         $tomorrow = date('Y-m-d 00:00:00', strtotime($date1 . "+1 days"));
-        
+
         if ($dateNow > date('Y-m-d 16:00:00')) {
             $dateNow = $tomorrow;
         }
@@ -107,7 +107,7 @@ class Site extends MY_Controller {
             echo json_encode(array('code' => 1, 'message' => "Nhận card thành công", 'data' => $card));
             return;
         }
-            
+
         echo json_encode(array('code' => 0, 'message' => 'Có lỗi xảy ra, vui lòng thử lại'));
     }
 

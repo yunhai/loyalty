@@ -19,17 +19,23 @@ abstract class MY_Controller extends CI_Controller {
 
     protected function checkUserLogin($isApi = false){
         $user = $this->session->userdata('user');
+ 
         if($user) {
-            $gate = $user['RoleId'] == ($isApi ? 2 : 1);
             $statusId = $this->Musers->getFieldValue(array('UserId' => $user['UserId']), 'StatusId', 0);
-            if($gate && $statusId == STATUS_ACTIVED) return $user;
-            else{
-                $fields = array('user', 'configs');
-                foreach($fields as $field) $this->session->unset_userdata($field);
-                if($isApi) echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
-                else redirect('admin?redirectUrl='.current_url());
-                die();
+            if ($statusId == STATUS_ACTIVED) {
+                return $user;
             }
+            $fields = array('user', 'configs');
+            foreach ($fields as $field) {
+                $this->session->unset_userdata($field);
+            }
+            if($isApi) {
+                echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
+            }
+            else {
+                redirect('admin?redirectUrl='.current_url());
+            }
+            die();
         }
         else {
             if($isApi) echo json_encode(array('code' => -1, 'message' => "Có lỗi xảy ra trong quá trình thực hiện"));
