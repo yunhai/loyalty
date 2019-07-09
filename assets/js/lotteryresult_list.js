@@ -52,6 +52,7 @@ function renderContentLotteryResults(data){
             html +='</td>';
             html += '</tr>';
         }
+        html += '<tr><td colspan="4" class="paginate_table"></td></tr>';
         $('#tbody').html(html);
     }
 }
