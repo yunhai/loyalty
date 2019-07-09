@@ -3,6 +3,8 @@
     <head>
         <title>Dự Đoán Lô Đề</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Dự đoán lô đề và nhận giải thưởng thẻ cào.">
+        <meta name="keywords" content="lo de, danh de, lô đề, đánh đề">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href="assets/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link rel="stylesheet" href="assets/vendor/plugins/pnotify/pnotify.custom.min.css"/>

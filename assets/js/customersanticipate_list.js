@@ -51,6 +51,7 @@ function renderContents(data){
             html +='</td>';
             html += '</tr>';
         }
+        html += '<tr><td colspan="8" class="paginate_table"></td></tr>';
         $('#tbody').html(html);
     }
 }

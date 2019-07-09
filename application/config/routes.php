@@ -54,5 +54,6 @@ $route['404_override'] = '';//'user/permission';
 $route['translate_uri_dashes'] = FALSE;
 //===============================================================
 $route['admin'] = 'user';
-$route['ban-da-chia-se-ket-qua-du-doan-la/(:num)'] = 'share/index/$1';
+// $route['ban-da-chia-se-ket-qua-du-doan-la/(:num)'] = 'share/index/$1';
+$route['share/?(:num)'] = 'share/index/$1';
 $route['quen-mat-khau.html'] = 'site/forGotPass';
