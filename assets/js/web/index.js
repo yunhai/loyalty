@@ -40,6 +40,10 @@ $(document).ready(function() {
         $(this).tab('show');
     });
 
+    $('#signup-register-link').click(function() {
+        $('.account--navigator a:last').tab('show');
+    });
+
     $('.scrollTo').click(function () {
         if ($(this).hasClass('login')) {
             $('.account--navigator a:first').tab('show');

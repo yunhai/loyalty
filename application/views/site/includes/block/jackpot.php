@@ -23,7 +23,7 @@
                 <button type="submit" class="btn btn-primary submit">NHẬP SỐ</button>
         </div>
         <div class="text-center">
-            <div class="fb-share-button" data-href="<? echo base_url() ?>" data-layout="button" data-size="large">
+            <div class="fb-share-button" data-href="<? echo base_url() ?>" data-layout="button" data-size="small">
             </div>
         </div>
         <?php echo form_close(); ?>

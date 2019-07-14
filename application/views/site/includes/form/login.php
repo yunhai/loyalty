@@ -22,6 +22,6 @@
     <button type="button" class="btn btn-primary" id='btnLogin'>ĐĂNG NHẬP</button>
     <div class="clearfix"></div>
     <div class="form-group text-center">
-        <span>Bạn chưa có tài khoản? <a href="#dang-ky-thanh-vien" id="signup">Đăng ký!</a> tại đây</span>
+        <span>Bạn chưa có tài khoản? <a href="#dang-ky-thanh-vien" id="signup-register-link">Đăng ký!</a> tại đây</span>
     </div>
 <?php echo form_close(); ?>
