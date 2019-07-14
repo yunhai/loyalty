@@ -5,8 +5,8 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Ngày chơi</th>
-                    <th class="text-center">Giải thưởng</th>
+                    <th class="col-xs-6">Ngày chơi</th>
+                    <th class="text-center col-xs-6">Giải thưởng</th>
                 </tr>
             </thead>
             <tbody id="tbody-bac"></tbody>

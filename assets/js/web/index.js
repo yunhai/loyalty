@@ -2,8 +2,9 @@ $(document).ready(function() {
     $(document).on('click','.js-menu_toggle.closed',function(e){
         e.preventDefault(); $('.list_load, .list_item').stop();
         $(this).removeClass('closed').addClass('opened');
-    
+
         $('.side_menu').css({ 'left':'0px' });
+        $('body').css({ 'overflow':'hidden' });
         $('#overpay').addClass('overpay');
         var count = $('.list_item').length;
         $('.list_load').slideDown( (count*.6)*100 );
@@ -18,12 +19,13 @@ $(document).ready(function() {
             },100*i);
         });
     });
-    
+
     $(document).on('click','.js-menu_toggle.opened',function(e){
         e.preventDefault(); $('.list_load, .list_item').stop();
         $(this).removeClass('opened').addClass('closed');
-    
+
         $('.side_menu').css({ 'left':'-80%' });
+        $('body').css({ 'overflow':'auto' });
         $('#overpay').removeClass('overpay');
         var count = $('.list_item').length;
         $('.list_item').css({
@@ -31,8 +33,8 @@ $(document).ready(function() {
             'margin-left':'-20px'
         });
         $('.list_load').slideUp(300);
-    });    
-    
+    });
+
     $('#myForm a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -52,7 +54,7 @@ $(document).ready(function() {
                 $('.account--navigator a:last').tab('show');
             }
         }
-        
+
         $('html, body').animate({ 
             scrollTop: $('.account--navigator').offset().top
         }, 1000);

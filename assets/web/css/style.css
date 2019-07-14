@@ -181,8 +181,7 @@ label {
     top: 2px;
 }
 
-.header-w3right ul li:nth-child(2),
-.header-w3right ul li:nth-child(4) {
+.header-w3right ul li:nth-child(2), .header-w3right ul li:nth-child(4) {
     color: #fff;
     margin: 0 10px;
 }
@@ -962,6 +961,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     border-color: #581b1a;
 }
 .rewarded table tbody>tr>td:first-child {
+    
     //border-right: 1px solid #581b1a;
 }
 
@@ -983,7 +983,12 @@ ul.callbacks_tabs.callbacks2_tabs {
     background-color: #450100;
 }
 
+
+/* // rewarded */
+
+
 /*form-guest*/
+
 .form-guess {
     background: url(../img/bg-form-guess.png) repeat;
 }
@@ -1326,6 +1331,7 @@ ul.callbacks_tabs.callbacks2_tabs {
 .modal-content #profile--submit, .modal-content #changePassword--submit {
     background: linear-gradient(0deg, rgba(214,149,57,1) 2%, rgba(237,194,82,1) 55%, rgba(255,248,142,1) 100%);
     border: 1px solid #d69539;
+    
 }
 .modal-content .modal-footer button {
     font-family: 'Anton', sans-serif;
@@ -1475,7 +1481,7 @@ height: 20px;
         border-top-right-radius: 10px;
     }
     .services button {
-    height: auto;
+            height: auto;
     font-size: 12px;
     width: 120px;
     margin-top: 10px;

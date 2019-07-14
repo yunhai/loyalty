@@ -96,25 +96,18 @@
                     <span class="bg-money">0</span>
                 </div>
                 <div class="header-w3right">
-                    <ul>
-                        <li>
+		            <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, <?php echo $user['UserName']; ?></a>
+                        <div class="dropdown-menu">
                             <a href="javascript:;" data-toggle="modal" data-target="#modal--profile">
                                 <span class=""></span>Profile
                             </a>
-                        </li>
-                        <li>|</li>
-                        <li>
                             <a href="javascript:;" data-toggle="modal" data-target="#modal--changePassword">
                                 <span class=""></span>Đổi mật khẩu
                             </a>
-                        </li>
-                        <li>|</li>
-                        <li>
-                            <a href="<?php echo base_url('site/logout'); ?>">
-                                <span class="fa-power-off-white"></span>Đăng xuất
-                            </a>
-                        </li>
-                    </ul>
+                            <a href="<?php echo base_url('site/logout'); ?>" class="dropdown-item"><span class="fa-power-off"></span>Đăng xuất</a>
+                        </div>
+                    </div>
                 </div>
                 <?php else: ?>
                 <div class="header-w3right">
