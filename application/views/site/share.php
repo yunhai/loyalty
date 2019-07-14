@@ -2,7 +2,7 @@
 <html class="no-js" lang="vi">
 <head>
     <title>Dự Đoán Lô Đề</title>
-    
+
     <?php $title = 'Tham gia dự đoán lô đề, trúng thẻ cào điện thoại'; ?>
     <?php $content = 'Mình đã tham gia dự đoán rồi, còn bạn thì sao?' ?>
 

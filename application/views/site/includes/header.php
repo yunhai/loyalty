@@ -35,6 +35,7 @@
         <meta property="og:image:width" content="400" />
         <meta property="og:image:height" content="300" />
         <meta property="og:image" content="<?php echo base_url().'assets/images/bg_share.png' ?>" />
+        <meta property="fb:app_id" content="1036969019993753" />
         <base href="<?php echo base_url(); ?>" />
     </head>
     <body>

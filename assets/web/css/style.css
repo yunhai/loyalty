@@ -1328,15 +1328,15 @@ ul.callbacks_tabs.callbacks2_tabs {
 .modal-content .modal-body {
     padding: 40px;
 }
-.modal-content #profile--submit, .modal-content #changePassword--submit {
+.modal-content #profile--submit, .modal-content #changePassword--submit, .modal-content .btn-primary {
     background: linear-gradient(0deg, rgba(214,149,57,1) 2%, rgba(237,194,82,1) 55%, rgba(255,248,142,1) 100%);
     border: 1px solid #d69539;
     
 }
 .modal-content .modal-footer button {
     font-family: 'Anton', sans-serif;
-    font-size: 16px;
-    padding: 10px 50px;
+    font-size: 14px;
+    padding: 10px 40px 5px 30px;
     text-transform: uppercase;
 }
 /*-- responsive --*/

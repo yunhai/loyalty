@@ -5,30 +5,16 @@ class Site extends MY_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('Mconfigs');
         $this->load->library('user_agent');
     }
 
-    // private function commonDataSite($title = ''){
-    //     $configSites =  $this->Mconfigs->getListMap();
-    //     return array(
-    //         'title' => $title . $configSites['COMPANY_NAME'],
-    //         'totalItemCart' => $this->cart->total_items(),
-    //         'configSites' => $configSites
-    //     );
-    // }
-
     public function index(){
-        $user = $this->session->userdata('user');
-        $num = 0;
-        $this->load->model(array('Mcustomersanticipates','Mquestions'));
-        if ($user) {
-            $num = $this->Mcustomersanticipates->getNum($user['UserId']);
-        }
+        $user = $this->getUserFromSesson();
+
+        $this->load->model(array('Mquestions'));
         $listQuestions = $this->Mquestions->getBy(array('StatusId' => STATUS_ACTIVED));
         $this->load->view('site/home', array(
-            'user' =>$user, 
-            'num' => $num, 
+            'user' => $user, 
             'listQuestions' => $listQuestions,
             'is_sp' => $this->agent->mobile()
         ));

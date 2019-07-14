@@ -25,7 +25,7 @@
             </tr>
         </table>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="text-align: center;">
         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
       </div>
     </div>
