@@ -24,6 +24,17 @@
         <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="16x16" />
         <link rel="icon" type="image/png" href="assets/vendor/dist/favicon/apple-touch-icon-57x57.png" sizes="128x128" />
+
+        <?php $title = 'Tham gia dự đoán lô đề, trúng thẻ cào điện thoại'; ?>
+        <?php $content = 'Mình đã tham gia dự đoán rồi, còn bạn thì sao? Cùng chơi và cùng trúng nhé.' ?>
+
+        <meta property="og:url" content="<?php echo current_url() ?>" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="<?php echo $title ?>" />
+        <meta property="og:description" content="<?php echo $content ?>" />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+        <meta property="og:image" content="<?php echo base_url().'assets/images/bg_share.png' ?>" />
         <base href="<?php echo base_url(); ?>" />
     </head>
     <body>
@@ -85,18 +96,25 @@
                     <span class="bg-money">0</span>
                 </div>
                 <div class="header-w3right">
-		            <div class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, <?php echo $user['UserName']; ?></a>
-                        <div class="dropdown-menu">
+                    <ul>
+                        <li>
                             <a href="javascript:;" data-toggle="modal" data-target="#modal--profile">
                                 <span class=""></span>Profile
                             </a>
+                        </li>
+                        <li>|</li>
+                        <li>
                             <a href="javascript:;" data-toggle="modal" data-target="#modal--changePassword">
                                 <span class=""></span>Đổi mật khẩu
                             </a>
-                            <a href="<?php echo base_url('site/logout'); ?>" class="dropdown-item"><span class="fa-power-off"></span>Đăng xuất</a>
-                        </div>
-                    </div>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="<?php echo base_url('site/logout'); ?>">
+                                <span class="fa-power-off-white"></span>Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <?php else: ?>
                 <div class="header-w3right">
