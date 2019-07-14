@@ -181,7 +181,8 @@ label {
     top: 2px;
 }
 
-.header-w3right ul li:nth-child(2) {
+.header-w3right ul li:nth-child(2),
+.header-w3right ul li:nth-child(4) {
     color: #fff;
     margin: 0 10px;
 }
@@ -189,7 +190,8 @@ label {
 .header-w3right ul li a {
     text-decoration: none;
     color: #fff;
-    font-size: 12px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .header-w3right .dropdown a {
@@ -215,6 +217,9 @@ label {
 
 .header-w3right .dropdown-menu a {
     color: #000;
+    display: block;
+    border-bottom: 1px dotted #89040417;
+    padding: 7px 0;
 }
 
 .dropdown-toggle::after {
@@ -510,7 +515,7 @@ h2.menu_title {
     -o-background-size: cover;
     -ms-background-size: cover;
     -moz-background-size: cover;
-    margin-top: -90px;
+    margin-top: -120px;
     z-index: 2;
     position: relative;
     min-height: 635px;
@@ -835,8 +840,8 @@ ul.callbacks_tabs.callbacks2_tabs {
 .services h2 {
     text-align: center;
     font-family: 'Anton';
-    font-size: 40px;
-    margin-top: 128px;
+    font-size: 36px;
+    margin-top: 107px;
     color: #deac47;
 }
 
@@ -887,12 +892,8 @@ ul.callbacks_tabs.callbacks2_tabs {
 }
 
 .services button {
-    position: absolute;
-    bottom: 135px;
     width: 330px;
     height: 68px;
-    left: 50%;
-    margin-left: -162px;
     background: url(../img/input-number.jpg) no-repeat;
     font-size: 24px;
     color: #694900;
@@ -904,6 +905,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     /* Do not repeat the image */
     background-size: cover;
     /* Resize the background image to cover the entire container */
+    margin-top:30px;
 }
 
 
@@ -943,6 +945,10 @@ ul.callbacks_tabs.callbacks2_tabs {
     text-indent: 40px;
 }
 
+.rewarded table>thead>tr {
+    background: url(../img/bg-header-table.jpg) repeat-x;
+    height: 48px;
+}
 .rewarded table>thead>tr>th {
     background: url(../img/bg-header-table.jpg) repeat-x;
     height: 48px;
@@ -955,6 +961,9 @@ ul.callbacks_tabs.callbacks2_tabs {
 .rewarded table tbody>tr>td {
     border-color: #581b1a;
 }
+.rewarded table tbody>tr>td:first-child {
+    //border-right: 1px solid #581b1a;
+}
 
 .rewarded table>thead>tr>th {
     border: none;
@@ -962,6 +971,8 @@ ul.callbacks_tabs.callbacks2_tabs {
 
 .rewarded table>thead>tr>th:first-child {
     border-right: 1px solid #dba03c;
+    width: calc( 100% - 8px );/* scrollbar is average 1em/16px width, remove it from thead width */
+    display: block;
 }
 
 .rewarded .table-striped>tbody>tr:nth-of-type(odd) {
@@ -972,12 +983,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     background-color: #450100;
 }
 
-
-/* // rewarded */
-
-
 /*form-guest*/
-
 .form-guess {
     background: url(../img/bg-form-guess.png) repeat;
 }
@@ -992,7 +998,7 @@ ul.callbacks_tabs.callbacks2_tabs {
 
 .form-guess form {
     margin: 0 auto;
-    padding: 60px 0 40px 0;
+    padding: 60px 20px 40px 20px;
 }
 
 .form-guess #register .col-md-6 {
@@ -1002,7 +1008,7 @@ ul.callbacks_tabs.callbacks2_tabs {
 
 .form-guess .login-form form {
     margin: 0 auto;
-    padding: 60px 245px 40px 245px;
+    padding: 60px 245px 25px 245px;
 }
 
 .form-guess form label {
@@ -1049,6 +1055,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     /* Do not repeat the image */
     background-size: cover;
     /* Resize the background image to cover the entire container */
+    margin-bottom: 50px;
 }
 
 .form-guess .tab-content button:hover {
@@ -1115,7 +1122,7 @@ ul.callbacks_tabs.callbacks2_tabs {
 .form-guess .nav-tabs>li.active,
 .form-guess .nav-tabs>li.active {
     background: #590006;
-    z-index: 2;8888;
+    z-index: 3;
 }
 
 .form-guess .nav-tabs>li.active>a,
@@ -1256,8 +1263,76 @@ ul.callbacks_tabs.callbacks2_tabs {
 
 
 /*-- //footer --*/
-
-
+.fb_iframe_widget {
+    display: inline-block;
+    position: unset !important;
+    margin-top: 15px;
+}
+.fb_iframe_widget_fluid {
+    display: block!important;
+}
+.popup {
+    color: #fff;
+}
+.rewarded table table ,.rewarded table tr td {
+    border:1px solid red
+}
+.rewarded table tbody {
+    display:block;
+    height:460px;
+    overflow:auto;
+}
+.rewarded table thead, .rewarded table tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+.rewarded table thead {
+    width: calc( 100% )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+.modal-header {
+    background: url(../img/bg-header-table.jpg) repeat-x;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    border: none;
+    border-top-right-radius: 1.4em;
+    border-top-left-radius: 1.4em;
+    font-family: 'Anton', sans-serif;
+}
+.modal-header .close {
+    color: #fff;
+    opacity: 1;
+    text-shadow: none;
+    font-size: 40px;
+    font-weight: normal;
+    margin-top: -13px;
+}
+.modal-content {
+    background: #590006;
+    border-radius: 1.4em;
+    font-family: 'tahoma', sans-serif;
+}
+.modal-content .form-group {
+    margin-bottom: 20px;
+}
+.modal-content .modal-footer {
+    border: none;
+    padding: 0 40px 40px 40px;
+}
+.modal-content .modal-body {
+    padding: 40px;
+}
+.modal-content #profile--submit, .modal-content #changePassword--submit {
+    background: linear-gradient(0deg, rgba(214,149,57,1) 2%, rgba(237,194,82,1) 55%, rgba(255,248,142,1) 100%);
+    border: 1px solid #d69539;
+}
+.modal-content .modal-footer button {
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    padding: 10px 50px;
+    text-transform: uppercase;
+}
 /*-- responsive --*/
 @media (min-width: 1800px) {
     .container {
@@ -1274,6 +1349,9 @@ ul.callbacks_tabs.callbacks2_tabs {
     }
 }
 
+Fixed table head - CSS-only
+Simply position: sticky; top: 0; your th elements. (Chrome, FF, Edge)
+
 @media (max-width: 1080px) {
     .container {
         width: 800px;
@@ -1282,8 +1360,12 @@ ul.callbacks_tabs.callbacks2_tabs {
         width: 900px;
     }
     .services h2 {
-        margin-top: 90px;
+        margin-top: 74px;
     }
+.services button {
+	width: 260px;
+        height: auto;
+}
     .services .input-group-t {
         margin-top: 2.2rem;
     }
@@ -1343,6 +1425,12 @@ ul.callbacks_tabs.callbacks2_tabs {
 }
 
 @media (max-width: 640px) {
+    .rewarded table.table-striped tbody td {
+        height:80px;
+    }
+	.rewarded table>thead>tr>th:first-child {
+    		width: calc( 100% );/* scrollbar is average 1em/16px width, remove it from thead width */
+	}
     .services-left,
     .services-right {
         padding: 0 10px;
@@ -1358,6 +1446,8 @@ ul.callbacks_tabs.callbacks2_tabs {
     .hi-icon:before {
         font-size: 20px;
     }
+._2tga._3e2a {
+height: 20px;
 }
 
 @media (max-width: 480px) {
@@ -1385,12 +1475,14 @@ ul.callbacks_tabs.callbacks2_tabs {
         border-top-right-radius: 10px;
     }
     .services button {
-        bottom: 55px;
-        height: 35px;
-        font-size: 12px;
-        width: 140px;
-        margin-left: -70px;
+    height: auto;
+    font-size: 12px;
+    width: 120px;
+    margin-top: 10px;
     }
+.fb_iframe_widget {
+ margin-top: 5px;
+}
     .services .services-left input,
     .services .services-right input {
         height: 100%;
@@ -1404,7 +1496,7 @@ ul.callbacks_tabs.callbacks2_tabs {
     }
     .services h3 {
         font-size: 9px;
-        margin-top: 21px;
+        margin-top: 10px;
     }
     .services h3 span {
         color: #deac47;
@@ -1429,7 +1521,7 @@ ul.callbacks_tabs.callbacks2_tabs {
         font-size: 15px;
     }
     .form-guess .login-form form {
-        padding: 60px 15px 40px 15px;
+        padding: 60px 15px 25px 15px;
     }
     .rewarded .table>thead>tr>td,
     .rewarded .table>tbody>tr>td,
@@ -1508,8 +1600,4 @@ ul.callbacks_tabs.callbacks2_tabs {
     .footer {
         padding: 12px 0 12px 0;
     }
-}
-
-.popup {
-    color: #333;
 }
