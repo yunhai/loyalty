@@ -49,12 +49,12 @@
                         </a>
                         <ul class="dropdown-menu">
                           <!-- User image -->
-                          <li class="user-header">
+                          <li class="user-header" style='display: none;'>
                             <!-- <img src="<?php echo USER_PATH.$avatar; ?>" class="img-circle" alt="User Image"> -->
                             <p> <?php echo $user['FullName']; ?></p>
                           </li>
                           <!-- Menu Footer-->
-                          <li class="user-footer">
+                          <li class="user-footer" style="background: #222d32;">
                             <div class="pull-left">
                                 <a href="<?php echo base_url('user/edit/'.$user['UserId']); ?>" class="btn btn-default btn-flat">Profile</a>
                             </div>
